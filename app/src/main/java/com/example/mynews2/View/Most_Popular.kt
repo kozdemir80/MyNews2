@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import com.example.mynews2.R
 
 
-class Third_Fragment : Fragment() {
+class Most_Popular:Fragment() {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
+     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
     }
@@ -21,8 +20,6 @@ class Third_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_third_, container, false)
+        return inflater.inflate(R.layout.top_stories, container, false)
     }
-
-
 }

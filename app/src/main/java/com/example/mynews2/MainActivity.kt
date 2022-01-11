@@ -9,6 +9,9 @@ import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.SearchView
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.example.mynews2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -19,6 +22,8 @@ class MainActivity : AppCompatActivity() {
         val viewBinding = ActivityMainBinding.inflate(layoutInflater)
         val adapter=ViewPagerAdapter(supportFragmentManager,lifecycle)
         setContentView(viewBinding.root)
+
+
 
         viewBinding.viewPager.adapter=adapter
         TabLayoutMediator(viewBinding.tabLayout,viewBinding.viewPager){tab,position->

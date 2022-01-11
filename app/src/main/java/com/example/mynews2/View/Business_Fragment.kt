@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import com.example.mynews2.R
 
 
-class Second_Fragment : Fragment() {
+class Business_Fragment : Fragment() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +21,7 @@ class Second_Fragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second_, container, false)
+        return inflater.inflate(R.layout.bussiness, container, false)
     }
 
 
