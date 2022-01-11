@@ -1,14 +1,12 @@
-package NewsApi
+package com.example.mynews2.NewsApi
 
-import androidx.contentpager.content.Query
 import com.example.mynews2.Constants.Companion.APİ_KEY
-import com.example.mynews2.NewsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 
 
 interface NewsApi {
-    @GET("mostpopular/v2/emailed/{period}.json")
+    @GET("/v2/viewed/{period}.json")
 
 
     suspend fun getMostPopularNews(
@@ -18,7 +16,7 @@ interface NewsApi {
         pageNumber: Int = 1,
         @retrofit2.http.Query("apiKey")
         apiKey:String=APİ_KEY
-    ): Response<NewsResponse>
+    ): Response<NewsJson>
 }
 
 
