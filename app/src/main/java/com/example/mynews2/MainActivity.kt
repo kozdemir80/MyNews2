@@ -1,29 +1,44 @@
 package com.example.mynews2
 
-import android.app.SearchManager
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.system.Os.close
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.SearchView
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import androidx.viewbinding.ViewBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mynews2.Model.NewsArticle
+import com.example.mynews2.View.NewsAdapter
 import com.example.mynews2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import java.lang.Exception
+
 
 class MainActivity : AppCompatActivity() {
     lateinit var toggle: ActionBarDrawerToggle
+
+   var recyclerAdapter: RecyclerView = findViewById(R.id.recyclerAdapter)
+    val newsList= ArrayList<NewsArticle>()
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewBinding = ActivityMainBinding.inflate(layoutInflater)
         val adapter=ViewPagerAdapter(supportFragmentManager,lifecycle)
         setContentView(viewBinding.root)
+
+
+
+        try {
+        recyclerAdapter.layoutManager=LinearLayoutManager(applicationContext)
+        recyclerAdapter.adapter=NewsAdapter(newsList)
+        recyclerAdapter.setHasFixedSize(true)
+        }catch(e:Exception){}
+
+
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navView) as NavHostFragment?
@@ -32,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         if (navController != null) {
             viewBinding.navView.setupWithNavController(navController)
         }
-
 
 
         viewBinding.viewPager.adapter=adapter
@@ -60,6 +74,11 @@ class MainActivity : AppCompatActivity() {
 
 
    }
+
+
+
+
+
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

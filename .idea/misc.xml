@@ -5,11 +5,13 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/article_fragment.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/layout/article_preview.xml" value="0.25" />
         <entry key="app/src/main/res/layout/bussiness.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/fragment_first_.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/fragment_second_.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/fragment_third_.xml" value="0.24114583333333334" />
-        <entry key="app/src/main/res/layout/most_popular.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/layout/item_preview.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/most_popular.xml" value="0.165" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/top_stories.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/menu/my_menu.xml" value="0.25" />

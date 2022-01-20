@@ -1,40 +1,42 @@
 package com.example.mynews2.View
 
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.DiffUtil
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.mynews2.Model.NewsArticle
 import com.example.mynews2.R
+import kotlin.collections.ArrayList
 
-class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>(){
 
-    inner class ArticleViewHolder(itemView:View):RecyclerView.ViewHolder(itemView)
+class NewsAdapter(private val newsList:ArrayList<NewsArticle>):RecyclerView.Adapter<NewsAdapter.ArticleNewsHolder>(){
 
-    private val differCallBack = object :DiffUtil.ItemCallback<Article_Fragment>(){
-        override fun areItemsTheSame(oldItem: Article_Fragment, newItem: Article_Fragment): Boolean {
-            return oldItem.id == newItem.id
-        }
 
-        override fun areContentsTheSame(oldItem: Article_Fragment, newItem: Article_Fragment): Boolean {
-           return  oldItem ==newItem
-        }
 
-    }
-    val differ= AsyncListDiffer(this,differCallBack)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-       return  ArticleViewHolder(
-           LayoutInflater.from(parent.context).inflate(R.layout.article_fragment,parent,false)
-       )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleNewsHolder {
+        val v=LayoutInflater.from(parent.context).inflate(R.layout.item_preview,parent,false)
+        return ArticleNewsHolder(v)
     }
 
-    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArticleNewsHolder, position: Int) {
+       holder.titleView.text=newsList[position].copyright
+       holder.dView.text=newsList[position].status
 
     }
 
     override fun getItemCount(): Int {
-        return differ.currentList.size
+        return newsList.size
     }
+    class ArticleNewsHolder(val view:View): RecyclerView.ViewHolder(view) {
+         val imageView: ImageView = view.findViewById<ImageView>(R.id.ivArticleImage)
+
+         val titleView:TextView= view.findViewById<TextView>(R.id.tvTitle)
+         val  dView:TextView=view.findViewById<TextView>(R.id.tvDescription)
+
+
+    }
+
 }

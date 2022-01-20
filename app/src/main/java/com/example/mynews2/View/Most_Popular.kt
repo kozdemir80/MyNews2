@@ -20,6 +20,6 @@ class Most_Popular:Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.top_stories, container, false)
+        return inflater.inflate(R.layout.most_popular, container, false)
     }
 }

@@ -1,22 +1,20 @@
 package com.example.mynews2.NewsApi
 
-import com.example.mynews2.Constants.Companion.APİ_KEY
-import retrofit2.Response
+import com.example.mynews2.Model.NewsArticle
+import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 
 interface NewsApi {
-    @GET("/v2/viewed/{period}.json")
+    @GET("v2/emailed/{period}.json")
 
 
-    suspend fun getMostPopularNews(
-        @retrofit2.http.Query("country")
-        countryCode: String = "us",
-        @retrofit2.http.Query("page")
-        pageNumber: Int = 1,
-        @retrofit2.http.Query("apiKey")
-        apiKey:String=APİ_KEY
-    ): Response<NewsJson>
+
+     fun getMostPopularNews():Single<List<NewsArticle>>
+
+
+
 }
 
 

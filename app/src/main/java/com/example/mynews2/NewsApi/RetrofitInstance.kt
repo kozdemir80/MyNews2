@@ -1,28 +1,22 @@
 package com.example.mynews2.NewsApi
 
 import com.example.mynews2.Constants.Companion.BASE_URL
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import com.example.mynews2.Model.NewsArticle
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Query
 
 class RetrofitInstance {
-    companion object{
 
-        private val retrofit by lazy {
-            val logging = HttpLoggingInterceptor()
-            logging.apply { logging.level = HttpLoggingInterceptor.Level.BODY }
-            val client= OkHttpClient.Builder()
-                .addInterceptor(logging)
-                .build()
-            Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(client)
-                .build()
-        }
-        val api by lazy {
-            retrofit.create(NewsApi::class.java)
-        }
+     private val api= Retrofit.Builder()
+         .baseUrl(BASE_URL)
+         .addConverterFactory(GsonConverterFactory.create())
+         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+         .build()
+         .create(NewsApi::class.java)
+     fun getData(): Single<List<NewsArticle>> {
+        return api.getMostPopularNews()
     }
 }
