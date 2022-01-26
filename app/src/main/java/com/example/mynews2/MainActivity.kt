@@ -2,41 +2,34 @@ package com.example.mynews2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.mynews2.Model.NewsArticle
-import com.example.mynews2.View.NewsAdapter
+import com.example.mynews2.NewsApi.Repository
+import com.example.mynews2.View.ViewPagerAdapter
+import com.example.mynews2.ViewModel.MostPopularViewModel
+import com.example.mynews2.ViewModel.ViewModelFactory
 import com.example.mynews2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import java.lang.Exception
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var toggle: ActionBarDrawerToggle
-
-   var recyclerAdapter: RecyclerView = findViewById(R.id.recyclerAdapter)
-    val newsList= ArrayList<NewsArticle>()
-
+    lateinit var binding: ActivityMainBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewBinding = ActivityMainBinding.inflate(layoutInflater)
-        val adapter=ViewPagerAdapter(supportFragmentManager,lifecycle)
-        setContentView(viewBinding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val adapter= ViewPagerAdapter(supportFragmentManager,lifecycle)
+        setContentView(binding.root)
 
 
-
-        try {
-        recyclerAdapter.layoutManager=LinearLayoutManager(applicationContext)
-        recyclerAdapter.adapter=NewsAdapter(newsList)
-        recyclerAdapter.setHasFixedSize(true)
-        }catch(e:Exception){}
 
 
 
@@ -45,12 +38,12 @@ class MainActivity : AppCompatActivity() {
         val navController: NavController? = navHostFragment?.navController
 
         if (navController != null) {
-            viewBinding.navView.setupWithNavController(navController)
+            binding.navView.setupWithNavController(navController)
         }
 
 
-        viewBinding.viewPager.adapter=adapter
-        TabLayoutMediator(viewBinding.tabLayout,viewBinding.viewPager){tab,position->
+        binding.viewPager.adapter=adapter
+        TabLayoutMediator(binding.tabLayout,binding.viewPager){tab,position->
             when(position){
                 0->{
                     tab.text="TOP STORIES"
@@ -65,9 +58,9 @@ class MainActivity : AppCompatActivity() {
 
         }.attach()
 
-        toggle= ActionBarDrawerToggle(this,viewBinding.drawerLayout,R.string.open,R.string.close)
+        toggle= ActionBarDrawerToggle(this,binding.drawerLayout,R.string.open,R.string.close)
 
-        viewBinding.drawerLayout.addDrawerListener(toggle)
+        binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

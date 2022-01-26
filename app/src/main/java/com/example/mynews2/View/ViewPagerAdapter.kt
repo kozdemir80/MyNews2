@@ -1,4 +1,4 @@
-package com.example.mynews2
+package com.example.mynews2.View
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

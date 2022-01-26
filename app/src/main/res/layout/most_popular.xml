@@ -8,7 +8,7 @@
     tools:context=".View.Most_Popular">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerAdapter"
+        android:id="@+id/recyclerData"
         android:layout_width="411dp"
         android:layout_height="731dp"
         android:layout_marginStart="8dp"
@@ -16,7 +16,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:reverseLayout="false"/>
 
 
 
