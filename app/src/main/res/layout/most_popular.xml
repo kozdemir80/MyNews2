@@ -20,6 +20,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:reverseLayout="false"/>
 
+   
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

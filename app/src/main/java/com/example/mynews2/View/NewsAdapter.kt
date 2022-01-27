@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.mynews2.Model.NewsArticle
 import com.example.mynews2.R
 import com.example.mynews2.Model.Result
 
@@ -26,8 +28,9 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleNewsHolder>(){
     override fun onBindViewHolder(holder: ArticleNewsHolder, position: Int) {
         val article=differ.currentList[position]
        holder.view.apply {
+         Glide.with(this).load(article.uri).into(holder.imageView)
          holder.titleView.text=article.title
-         holder.dView.text=article.abstract
+         holder.dView.text= article.abstract
 
           setOnClickListener{
               onItemClickListener?.let { it(article) }
@@ -38,6 +41,11 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleNewsHolder>(){
 
 
     }
+
+    private fun it(article: Result?) {
+
+    }
+
 
     override fun getItemCount(): Int {
         return differ.currentList.size

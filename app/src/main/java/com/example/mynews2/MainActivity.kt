@@ -2,32 +2,32 @@ package com.example.mynews2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+
+
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.example.mynews2.NewsApi.Repository
+
+
 import com.example.mynews2.View.ViewPagerAdapter
-import com.example.mynews2.ViewModel.MostPopularViewModel
-import com.example.mynews2.ViewModel.ViewModelFactory
+
+
 import com.example.mynews2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainActivity : AppCompatActivity() {
-    lateinit var toggle: ActionBarDrawerToggle
-    lateinit var binding: ActivityMainBinding
-
+    private lateinit var toggle: ActionBarDrawerToggle
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val adapter= ViewPagerAdapter(supportFragmentManager,lifecycle)
         setContentView(binding.root)
+
 
 
 
@@ -67,11 +67,6 @@ class MainActivity : AppCompatActivity() {
 
 
    }
-
-
-
-
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -20,7 +20,7 @@ interface NewsApi {
     suspend fun getMostPopularNews(
         @Query("api-key")
         apiKey:String=APİ_KEY
-    ):NewsArticle
+    ):Response<NewsArticle>
 
 }
 
