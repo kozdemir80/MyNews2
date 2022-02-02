@@ -8,4 +8,16 @@
     <string name="source">SOURCE</string>
     <string name="title">TITLE</string>
     <string name="description">DESCRIPTION</string>
+    <string name="published_at">PUBLISHED AT</string>
+    <string name="politics">politics</string>
+    <string name="sport">sport</string>
+    <string name="travel">travel</string>
+    <string name="enable_notification">enable_notification</string>
+    <string name="search">search</string>
+    <string name="search_query_term">Search query term</string>
+    <string name="begin_date_hint">begin_date_hint</string>
+    <string name="end_date_hint">end_date_hint</string>
+    <string name="arts">arts</string>
+    <string name="business">business</string>
+    <string name="entrepreneurs">entrepreneurs</string>
 </resources>

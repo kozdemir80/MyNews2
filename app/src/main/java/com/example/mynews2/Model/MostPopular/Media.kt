@@ -1,4 +1,4 @@
-package com.example.mynews2.Model
+package com.example.mynews2.Model.MostPopular
 
 import com.google.gson.annotations.SerializedName
 

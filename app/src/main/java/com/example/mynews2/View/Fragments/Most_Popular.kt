@@ -1,53 +1,53 @@
-package com.example.mynews2.View
+package com.example.mynews2.View.Fragments
 
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+
+
 import android.view.View
-import android.view.ViewGroup
-import android.view.ViewManager
+
+
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.DividerItemDecoration
+
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynews2.Model.NewsArticle
-import com.example.mynews2.Model.Result
-import com.example.mynews2.NewsApi.Repository
-import com.example.mynews2.NewsApi.RetrofitInstance
+
+
+import com.example.mynews2.NewsApi.MostPopularInstance.Repository
+
+
 import com.example.mynews2.R
-import com.example.mynews2.R.*
+import com.example.mynews2.View.Adapters.NewsAdapter
 import com.example.mynews2.ViewModel.MostPopularViewModel
 import com.example.mynews2.ViewModel.ViewModelFactory
-import retrofit2.Response
 
 
-class Most_Popular:Fragment(layout.most_popular) {
 
 
-   private lateinit var recyclerView: RecyclerView
+class Most_Popular:Fragment(R.layout.most_popular) {
+
+
+
     private lateinit var viewModel: MostPopularViewModel
     private lateinit var newsAdapter: NewsAdapter
+    private lateinit var recyclerView: RecyclerView
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
 
-        val rootView= inflater.inflate(layout.most_popular, container, false)
-        recyclerView= rootView?.findViewById(R.id.recyclerData)!!
-        recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager=LinearLayoutManager(activity)
-       recyclerView.adapter=NewsAdapter()
-        return rootView
-    }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        newsAdapter=NewsAdapter()
+        recyclerView=view.findViewById(R.id.recyclerData)
+
+        newsAdapter= NewsAdapter()
+        recyclerView.adapter=newsAdapter
+        recyclerView.layoutManager=LinearLayoutManager(activity)
+        recyclerView.setHasFixedSize(true)
+        newsAdapter.notifyDataSetChanged()
+
         val repository= Repository()
         val viewModelFactory= ViewModelFactory(repository)
         viewModel= ViewModelProvider(this,viewModelFactory).get(MostPopularViewModel::class.java)
@@ -66,6 +66,9 @@ class Most_Popular:Fragment(layout.most_popular) {
            }
 
         })
+
+
     }
 
 }
+

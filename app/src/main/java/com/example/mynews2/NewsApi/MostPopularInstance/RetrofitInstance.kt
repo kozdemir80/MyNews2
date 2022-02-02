@@ -1,16 +1,12 @@
-package com.example.mynews2.NewsApi
+package com.example.mynews2.NewsApi.MostPopularInstance
 
-import com.example.mynews2.Constants.Companion.BASE_URL
-import com.example.mynews2.Model.NewsArticle
-import com.google.gson.Gson
-import io.reactivex.rxjava3.core.Single
+
+
+import com.example.mynews2.Constants.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Query
 
 object RetrofitInstance {
 

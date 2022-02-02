@@ -1,5 +1,6 @@
-package com.example.mynews2.Model
+package com.example.mynews2.Model.MostPopular
 
+import com.example.mynews2.Model.MostPopular.Media
 import com.google.gson.annotations.SerializedName
 
 data class Result(

@@ -5,7 +5,7 @@
     android:id="@+id/most_Popular"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Most_Popular">
+    tools:context=".View.Fragments.Most_Popular">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerData"

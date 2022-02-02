@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="View.Top_Stories">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".View.Fragments.Top_Stories">
 
-      <TextView
+      <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/top_Stories"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textSize="35sp"
-          android:layout_centerInParent="true"/>
+          android:layout_width="411dp"
+          android:layout_height="731dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginEnd="8dp"
+          app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+          tools:ignore="MissingConstraints" />"/>
 
-</LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

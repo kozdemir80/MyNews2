@@ -1,4 +1,4 @@
-package com.example.mynews2
+package com.example.mynews2.Controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,9 +9,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.example.mynews2.R
 
 
-import com.example.mynews2.View.ViewPagerAdapter
+import com.example.mynews2.View.Adapters.ViewPagerAdapter
 
 
 import com.example.mynews2.databinding.ActivityMainBinding
@@ -58,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         }.attach()
 
-        toggle= ActionBarDrawerToggle(this,binding.drawerLayout,R.string.open,R.string.close)
+        toggle= ActionBarDrawerToggle(this,binding.drawerLayout, R.string.open, R.string.close)
 
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()

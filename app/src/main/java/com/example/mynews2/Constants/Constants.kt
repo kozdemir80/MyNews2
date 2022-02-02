@@ -1,4 +1,4 @@
-package com.example.mynews2
+package com.example.mynews2.Constants
 
 class Constants {
 
