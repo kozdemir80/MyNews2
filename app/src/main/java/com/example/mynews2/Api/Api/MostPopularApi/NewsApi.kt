@@ -1,4 +1,4 @@
-package com.example.mynews2.NewsApi.MostPopularInstance
+package com.example.mynews2.Api.Api.MostPopularApi
 
 
 

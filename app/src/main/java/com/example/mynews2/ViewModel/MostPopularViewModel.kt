@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.mynews2.Model.MostPopular.NewsArticle
 
 
-import com.example.mynews2.NewsApi.MostPopularInstance.Repository
+import com.example.mynews2.Api.Api.MostPopularApi.Repository
 
 
 import kotlinx.coroutines.launch

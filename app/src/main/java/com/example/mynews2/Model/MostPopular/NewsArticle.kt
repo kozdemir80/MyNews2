@@ -1,6 +1,7 @@
 package com.example.mynews2.Model.MostPopular
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class NewsArticle(
     @SerializedName("copyright")
@@ -11,4 +12,4 @@ data class NewsArticle(
     val results: List<Result>,
     @SerializedName("status")
     val status: String
-)
+): Serializable

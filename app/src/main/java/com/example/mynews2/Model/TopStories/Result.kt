@@ -1,5 +1,7 @@
 package com.example.mynews2.Model.TopStories
 
+import java.io.Serializable
+
 data class Result(
     val `abstract`: String,
     val byline: String,
@@ -20,4 +22,4 @@ data class Result(
     val updated_date: String,
     val uri: String,
     val url: String
-)
+) : Serializable

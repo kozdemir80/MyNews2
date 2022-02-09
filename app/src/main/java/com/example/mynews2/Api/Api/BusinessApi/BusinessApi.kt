@@ -1,8 +1,7 @@
-package com.example.mynews2.BussinessApi
+package com.example.mynews2.Api.Api.BusinessApi
 
 import com.example.mynews2.Constants.Constants
 import com.example.mynews2.Model.Business.BusinessArticle
-import com.example.mynews2.Model.TopStories.TopStoriesArticle
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,15 +1,12 @@
-package com.example.mynews2.NewsApi.MostPopularInstance
+package com.example.mynews2.Api.Api.BusinessApi
 
-
-
-import com.example.mynews2.Constants.Constants.Companion.BASE_URL
+import com.example.mynews2.Constants.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitInstance {
-
+object BusinessInstance {
     private val retrofit by lazy {
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
@@ -17,13 +14,12 @@ object RetrofitInstance {
             .addInterceptor(logging)
             .build()
         Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()
     }
-    val api: NewsApi by lazy {
-        retrofit.create(NewsApi::class.java)
+    val api: BusinessApi by lazy {
+        retrofit.create(BusinessApi::class.java)
     }
-
 }

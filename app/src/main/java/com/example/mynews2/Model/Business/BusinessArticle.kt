@@ -1,5 +1,7 @@
 package com.example.mynews2.Model.Business
 
+import java.io.Serializable
+
 data class BusinessArticle(
     val copyright: String,
     val last_updated: String,
@@ -7,4 +9,4 @@ data class BusinessArticle(
     val results: List<Result>,
     val section: String,
     val status: String
-)
+): Serializable

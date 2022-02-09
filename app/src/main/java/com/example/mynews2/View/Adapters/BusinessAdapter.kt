@@ -12,6 +12,9 @@ import com.bumptech.glide.Glide
 import com.example.mynews2.Model.Business.Result
 import com.example.mynews2.R
 
+
+import kotlin.NullPointerException
+
 class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusinessNewsHolder {
@@ -24,7 +27,9 @@ class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(
     override fun onBindViewHolder(holder: BusinessNewsHolder, position: Int) {
         val article=differ.currentList[position]
         holder.view.apply {
-            Glide.with(this).load(article.url).into(holder.imageView)
+            try {
+
+            Glide.with(this).load(article.multimedia[0].url).into(holder.imageView)}catch (e:NullPointerException){}
             holder.titleView.text=article.section
             holder.dView.text= article.title
             holder.date.text=article.published_date

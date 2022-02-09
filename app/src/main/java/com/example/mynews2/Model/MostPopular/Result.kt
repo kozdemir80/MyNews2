@@ -2,6 +2,7 @@ package com.example.mynews2.Model.MostPopular
 
 import com.example.mynews2.Model.MostPopular.Media
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Result(
     @SerializedName("abstract")
@@ -48,4 +49,4 @@ data class Result(
     val uri: String,
     @SerializedName("url")
     val url: String
-)
+) : Serializable

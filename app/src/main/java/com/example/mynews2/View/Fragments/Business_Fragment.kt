@@ -3,22 +3,17 @@ package com.example.mynews2.View.Fragments
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynews2.BussinessApi.BusinessRespository
-import com.example.mynews2.NewsApi.MostPopularInstance.Repository
+import com.example.mynews2.Api.Api.BusinessApi.BusinessRespository
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.BusinessAdapter
-import com.example.mynews2.View.Adapters.NewsAdapter
 import com.example.mynews2.ViewModel.BusinessViewModel
 import com.example.mynews2.ViewModel.BusinessViewModelFactory
-import com.example.mynews2.ViewModel.MostPopularViewModel
-import com.example.mynews2.ViewModel.ViewModelFactory
 
 
 class Business_Fragment : Fragment(R.layout.bussiness) {
@@ -35,6 +30,15 @@ class Business_Fragment : Fragment(R.layout.bussiness) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView=view.findViewById(R.id.business)
+        businessAdapter=BusinessAdapter()
+        businessAdapter.setOnItemClickListen {
+            val bundle=Bundle().apply {
+                putSerializable("businessArticle",it)
+            }
+            findNavController().navigate(
+                R.id.action_business_Fragment_to_Article_Fragment,bundle
+            )
+        }
 
         businessAdapter= BusinessAdapter()
         recyclerView.adapter=businessAdapter

@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mynews2.Model.TopStories.TopStoriesArticle
-import com.example.mynews2.TopStoriesApi.TopRepository
+import com.example.mynews2.Api.Api.TopStoriesApi.TopRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 

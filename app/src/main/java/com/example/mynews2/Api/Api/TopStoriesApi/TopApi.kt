@@ -1,4 +1,4 @@
-package com.example.mynews2.TopStoriesApi
+package com.example.mynews2.Api.Api.TopStoriesApi
 
 import com.example.mynews2.Constants.Constants
 import com.example.mynews2.Model.TopStories.TopStoriesArticle

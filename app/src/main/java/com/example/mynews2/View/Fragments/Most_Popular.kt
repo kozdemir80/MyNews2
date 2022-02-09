@@ -10,13 +10,14 @@ import android.view.View
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
-import com.example.mynews2.NewsApi.MostPopularInstance.Repository
+import com.example.mynews2.Api.Api.MostPopularApi.Repository
 
 
 import com.example.mynews2.R
@@ -41,6 +42,16 @@ class Most_Popular:Fragment(R.layout.most_popular) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView=view.findViewById(R.id.recyclerData)
+        newsAdapter=NewsAdapter()
+        newsAdapter.setOnItemClickListen {
+            val bundle=Bundle().apply {
+                putSerializable("mostArticle",it)
+            }
+            findNavController().navigate(
+                R.id.action_most_Popular_to_Article_Fragment,bundle
+            )
+        }
+
 
         newsAdapter= NewsAdapter()
         recyclerView.adapter=newsAdapter
