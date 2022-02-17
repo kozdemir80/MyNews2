@@ -43,7 +43,7 @@ class TopStoriesAdapter:RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
 
     }
 
-    private fun it(article: com.example.mynews2.Model.TopStories.Result?,multimedia: com.example.mynews2.Model.TopStories.Multimedia) {
+    private fun it(article: com.example.mynews2.Model.TopStories.Result?) {
 
     }
 

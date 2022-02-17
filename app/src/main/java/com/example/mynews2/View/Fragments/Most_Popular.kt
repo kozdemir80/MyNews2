@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 
 
 import android.view.View
+import android.webkit.WebView
+import android.webkit.WebViewClient
 
 
 import androidx.lifecycle.Observer
@@ -18,6 +20,9 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 import com.example.mynews2.Api.Api.MostPopularApi.Repository
+import com.example.mynews2.Model.MostPopular.MediaMetadata
+import com.example.mynews2.Model.MostPopular.NewsArticle
+import com.example.mynews2.Model.MostPopular.Result
 
 
 import com.example.mynews2.R
@@ -39,9 +44,12 @@ class Most_Popular:Fragment(R.layout.most_popular) {
 
 
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView=view.findViewById(R.id.recyclerData)
+
         newsAdapter=NewsAdapter()
         newsAdapter.setOnItemClickListen {
             val bundle=Bundle().apply {
@@ -51,6 +59,7 @@ class Most_Popular:Fragment(R.layout.most_popular) {
                 R.id.action_most_Popular_to_Article_Fragment,bundle
             )
         }
+
 
 
         newsAdapter= NewsAdapter()

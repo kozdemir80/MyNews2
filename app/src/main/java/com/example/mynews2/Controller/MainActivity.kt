@@ -6,13 +6,20 @@ import android.os.Bundle
 
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.R
+import com.example.mynews2.View.Adapters.NewsAdapter
 
 
 import com.example.mynews2.View.Adapters.ViewPagerAdapter
+import com.example.mynews2.View.Fragments.Most_Popular
+import com.example.mynews2.View.Fragments.Most_PopularDirections
 
 
 import com.example.mynews2.databinding.ActivityMainBinding
@@ -23,11 +30,16 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toggle: ActionBarDrawerToggle
     private lateinit var binding: ActivityMainBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val adapter= ViewPagerAdapter(supportFragmentManager,lifecycle)
         setContentView(binding.root)
+
+
+
+
 
 
 

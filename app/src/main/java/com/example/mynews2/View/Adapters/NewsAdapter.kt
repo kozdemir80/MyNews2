@@ -1,7 +1,6 @@
 package com.example.mynews2.View.Adapters
 
 
-import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,13 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mynews2.Model.MostPopular.Media
+import com.example.mynews2.Model.MostPopular.MediaMetadata
+import com.example.mynews2.Model.MostPopular.NewsArticle
 import com.example.mynews2.R
 import com.example.mynews2.Model.MostPopular.Result
+import retrofit2.http.Url
+
 import java.lang.NullPointerException
 
 
@@ -36,9 +40,9 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleNewsHolder>(){
          holder.dView.text= article.title
          holder.date.text=article.published_date
 
-          setOnClickListener{
-              onItemClickListener?.let { it(article) }
-          }
+           setOnClickListener {
+               onItemClickListener?.let { it(article) }
+           }
 
 
        }
@@ -46,7 +50,7 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleNewsHolder>(){
 
     }
 
-    private fun it(article: Result?) {
+    private fun it(article:Result?) {
 
     }
 
@@ -60,6 +64,8 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleNewsHolder>(){
         val titleView: TextView = view.findViewById(R.id.tvTitle)
         val dView: TextView = view.findViewById(R.id.tvDescription)
         val date:TextView=view.findViewById(R.id.tvPublishedAt)
+
+
 
 
     }
@@ -78,9 +84,9 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleNewsHolder>(){
     val differ= AsyncListDiffer(this,differCallBack)
 
 
-    private var onItemClickListener:((Result)-> Unit)?=null
+    private var onItemClickListener:((NewsArticle)-> Unit)?=null
 
-    fun setOnItemClickListen(listener:(Result) -> Unit){
+    fun setOnItemClickListen(listener:(NewsArticle) -> Unit){
         onItemClickListener =listener
     }
 }

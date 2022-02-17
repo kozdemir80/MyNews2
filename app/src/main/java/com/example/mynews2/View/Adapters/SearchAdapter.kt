@@ -20,7 +20,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Model.Business.Result
 import com.example.mynews2.R
 import com.google.android.material.textfield.TextInputEditText
-
+import java.text.SimpleDateFormat
+import java.time.DayOfWeek
+import java.time.Month
+import java.time.Year
+import java.time.YearMonth
+import java.util.*
 
 
 class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
@@ -35,6 +40,15 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
         val article=differ.currentList[position]
+        val myCalender= Calendar.getInstance()
+        val datePicker=DatePickerDialog.OnDateSetListener{view,year,month,dayOfMonth->
+            myCalender.set(Calendar.YEAR,year)
+            myCalender.set(Calendar.MONTH,month)
+            myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            val myFormat="dd-MM-yyyy"
+            val sdf=SimpleDateFormat(myFormat,Locale.FRANCE)
+            holder.beginDate.setText(sdf.format(myCalender.time))
+        }
 
 
         holder.view.apply {
@@ -49,6 +63,8 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
 
 
     }
+
+
 
     private fun it(article: Result) {
 

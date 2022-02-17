@@ -12,18 +12,17 @@ import com.example.mynews2.Controller.MainActivity
 import com.example.mynews2.Model.TopStories.Result
 import com.example.mynews2.Model.TopStories.TopStoriesArticle
 import com.example.mynews2.R
-import com.example.mynews2.ViewModel.TopStoriesViewModel
-import kotlin.reflect.KProperty
 
+
+private lateinit var webView: WebView
 class Article_Fragment:Fragment(R.layout.article_fragment){
     val args by navArgs<Article_FragmentArgs>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val webView:WebView?=view.findViewById(R.id.webView)
-        val article= args.topArticle!!
-        webView?.apply {
+        webView=view.findViewById(R.id.webView)
+        webView.apply {
             webViewClient= WebViewClient()
-            loadUrl(article.results[0].url)
+            loadUrl(args.mostArticle.toString())
         }
 
 
