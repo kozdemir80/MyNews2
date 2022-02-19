@@ -5,30 +5,21 @@ import android.view.View
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavArgs
-import androidx.navigation.NavArgsLazy
-import androidx.navigation.fragment.navArgs
-import com.example.mynews2.Controller.MainActivity
 import com.example.mynews2.Model.TopStories.Result
-import com.example.mynews2.Model.TopStories.TopStoriesArticle
 import com.example.mynews2.R
+import com.example.mynews2.View.Adapters.TopStoriesAdapter
 
-
-private lateinit var webView: WebView
-class Article_Fragment:Fragment(R.layout.article_fragment){
-    val args by navArgs<Article_FragmentArgs>()
+class ArticleFragment:Fragment(R.layout.article_fragment){
+     private lateinit var webView: WebView
+     private lateinit var topStoriesAdapter: TopStoriesAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        topStoriesAdapter=TopStoriesAdapter()
         webView=view.findViewById(R.id.webView)
+        webView=webView
         webView.apply {
             webViewClient= WebViewClient()
-            loadUrl(args.mostArticle.toString())
+            loadUrl(topStoriesAdapter.differ.currentList[0].url)
         }
-
-
-
-
+    }
 }
-}
-
-
