@@ -3,24 +3,36 @@ package com.example.mynews2.View.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mynews2.Model.Business.Multimedia
-import com.example.mynews2.Model.MostPopular.Result
 import com.example.mynews2.R
 import java.lang.NullPointerException
 
-class TopStoriesAdapter:RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
+class TopStoriesAdapter() :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
+
+    private lateinit var mListener:onItemClickListener
+
+    interface onItemClickListener{
+
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener:TopStoriesAdapter.onItemClickListener){
+        mListener=listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsHolder {
-        return NewsHolder(LayoutInflater.from(parent.context).inflate
-            (R.layout.item_preview,parent,false)
+        return  NewsHolder(LayoutInflater.from(parent.context).inflate
+            (R.layout.item_preview,parent,false),mListener
         )
     }
+
+
 
     override fun onBindViewHolder(holder: NewsHolder, position: Int) {
         val article=differ.currentList[position]
@@ -33,9 +45,7 @@ class TopStoriesAdapter:RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
             holder.dView.text= article.title
             holder.date.text=article.published_date
 
-            setOnClickListener{
-                onItemClickListener?.let { it(article) }
-            }
+
 
 
         }
@@ -51,12 +61,23 @@ class TopStoriesAdapter:RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
-    class NewsHolder(val view:View): RecyclerView.ViewHolder(view) {
+    class NewsHolder(val view: View, listener: onItemClickListener): RecyclerView.ViewHolder(view)
+       {
         val imageView: ImageView = view.findViewById(R.id.ivArticleImage)
 
         val titleView: TextView = view.findViewById(R.id.tvTitle)
         val dView: TextView = view.findViewById(R.id.tvDescription)
         val date:TextView=view.findViewById(R.id.tvPublishedAt)
+
+           init {
+
+               view.setOnClickListener {
+                   listener.onItemClick(adapterPosition)
+               }
+
+           }
+
+
 
 
     }
@@ -75,11 +96,14 @@ class TopStoriesAdapter:RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
     val differ= AsyncListDiffer(this,differCallBack)
 
 
-    private var onItemClickListener:((com.example.mynews2.Model.TopStories.Result)-> Unit)?=null
-
-    fun setOnItemClickListen(listener:(com.example.mynews2.Model.TopStories.Result) -> Unit){
-        onItemClickListener =listener
-    }
+    
 
 
 }
+
+private fun AdapterView.OnItemClickListener.onItemClick(adapterPosition: Int) {
+
+}
+
+
+

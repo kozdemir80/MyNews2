@@ -6,25 +6,18 @@ import androidx.fragment.app.Fragment
 
 
 import android.view.View
-import android.webkit.WebView
-import android.webkit.WebViewClient
+
+
 
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+
 
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
-
 import com.example.mynews2.Api.Api.MostPopularApi.Repository
-import com.example.mynews2.Model.MostPopular.MediaMetadata
-import com.example.mynews2.Model.MostPopular.NewsArticle
-import com.example.mynews2.Model.MostPopular.Result
-
-
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.NewsAdapter
 import com.example.mynews2.ViewModel.MostPopularViewModel
@@ -51,14 +44,7 @@ class Most_Popular:Fragment(R.layout.most_popular) {
         recyclerView=view.findViewById(R.id.recyclerData)
 
         newsAdapter=NewsAdapter()
-        newsAdapter.setOnItemClickListen {
-            val bundle=Bundle().apply {
-                putSerializable("mostArticle",it)
-            }
-            findNavController().navigate(
-                R.id.action_most_Popular_to_Article_Fragment,bundle
-            )
-        }
+
 
 
 

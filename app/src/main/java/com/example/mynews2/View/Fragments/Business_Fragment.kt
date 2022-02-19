@@ -31,14 +31,7 @@ class Business_Fragment : Fragment(R.layout.bussiness) {
         super.onViewCreated(view, savedInstanceState)
         recyclerView=view.findViewById(R.id.business)
         businessAdapter=BusinessAdapter()
-        businessAdapter.setOnItemClickListen {
-            val bundle=Bundle().apply {
-                putSerializable("businessArticle",it)
-            }
-            findNavController().navigate(
-                R.id.action_business_Fragment_to_Article_Fragment,bundle
-            )
-        }
+
 
         businessAdapter= BusinessAdapter()
         recyclerView.adapter=businessAdapter

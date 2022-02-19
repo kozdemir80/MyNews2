@@ -15,10 +15,11 @@
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/search_notification.xml" value="0.335" />
         <entry key="app/src/main/res/layout/top_stories.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/menu-v11/search_view.xml" value="0.109375" />
         <entry key="app/src/main/res/menu/my_menu.xml" value="0.25" />
         <entry key="app/src/main/res/menu/navdrawer_menu.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/menu/new_menu.xml" value="0.24114583333333334" />
-        <entry key="app/src/main/res/menu/search_view.xml" value="0.7714285714285715" />
+        <entry key="app/src/main/res/menu/search_view.xml" value="0.25" />
       </map>
     </option>
   </component>

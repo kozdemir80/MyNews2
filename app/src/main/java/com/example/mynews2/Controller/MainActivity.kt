@@ -19,7 +19,8 @@ import com.example.mynews2.View.Adapters.NewsAdapter
 
 import com.example.mynews2.View.Adapters.ViewPagerAdapter
 import com.example.mynews2.View.Fragments.Most_Popular
-import com.example.mynews2.View.Fragments.Most_PopularDirections
+
+
 
 
 import com.example.mynews2.databinding.ActivityMainBinding

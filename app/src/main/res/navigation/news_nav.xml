@@ -11,40 +11,22 @@
         android:id="@+id/top_Stories"
         android:name="com.example.mynews2.View.Fragments.Top_Stories"
         android:label="Top_Stories" >
-        <action
-            android:id="@+id/action_top_Stories_to_Article_Fragment"
-            app:destination="@id/article_Fragment" />
+
     </fragment>
     <fragment
         android:id="@+id/most_Popular"
         android:name="com.example.mynews2.View.Fragments.Most_Popular"
         android:label="most_popular"
         tools:layout="@layout/most_popular" >
-        <action
-            android:id="@+id/action_most_Popular_to_Article_Fragment"
-            app:destination="@id/article_Fragment" />
+
     </fragment>
     <fragment
         android:id="@+id/business_Fragment"
         android:name="com.example.mynews2.View.Fragments.Business_Fragment"
         android:label="bussiness"
         tools:layout="@layout/bussiness" >
-        <action
-            android:id="@+id/action_business_Fragment_to_Article_Fragment"
-            app:destination="@id/article_Fragment" />
+
+
     </fragment>
-    <fragment
-        android:id="@+id/article_Fragment"
-        android:name="com.example.mynews2.View.Fragments.Article_Fragment"
-        android:label="Article_Fragment" >
-        <argument
-            android:name="topArticle"
-            app:argType="com.example.mynews2.Model.TopStories.TopStoriesArticle" />
-        <argument
-            android:name="mostArticle"
-            app:argType="com.example.mynews2.Model.MostPopular.NewsArticle" />
-        <argument
-            android:name="businessArticle"
-            app:argType="com.example.mynews2.Model.Business.BusinessArticle" />
-    </fragment>
+
 </navigation>
