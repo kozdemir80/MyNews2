@@ -1,15 +1,15 @@
 package com.example.mynews2.View.Adapters
 
+
+
 import android.app.DatePickerDialog
-import android.app.PendingIntent.getActivity
-import android.content.Context
 import android.os.Build
+import android.provider.CalendarContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -18,13 +18,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 import com.example.mynews2.Model.Business.Result
+import com.example.mynews2.Model.SearchArticle.Response
+import com.example.mynews2.Model.SearchArticle.SearchTitle
 import com.example.mynews2.R
 import com.google.android.material.textfield.TextInputEditText
-import java.text.SimpleDateFormat
-import java.time.DayOfWeek
-import java.time.Month
-import java.time.Year
-import java.time.YearMonth
+import retrofit2.http.Query
 import java.util.*
 
 
@@ -33,40 +31,37 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHolder {
         return SearchHolder(
             LayoutInflater.from(parent.context).inflate
-                (R.layout.search_notification,parent,false)
+                (R.layout.search_items,parent,false)
         )
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
         val article=differ.currentList[position]
-        val myCalender= Calendar.getInstance()
-        val datePicker=DatePickerDialog.OnDateSetListener{view,year,month,dayOfMonth->
-            myCalender.set(Calendar.YEAR,year)
-            myCalender.set(Calendar.MONTH,month)
-            myCalender.set(Calendar.DAY_OF_MONTH,dayOfMonth)
-            val myFormat="dd-MM-yyyy"
-            val sdf=SimpleDateFormat(myFormat,Locale.FRANCE)
-            holder.beginDate.setText(sdf.format(myCalender.time))
-        }
+
+       holder.arts.isChecked=article.response.docs[0].keywords[0].name[0].isDefined()
+        holder.business.isChecked=article.response.docs[0].keywords[0].name[0].isDefined()
+        holder.travel.isChecked=article.response.docs[0].keywords[0].name[0].isDefined()
+        holder.sports.isChecked=article.response.docs[0].keywords[0].name[0].isDefined()
+        holder.politics.isChecked=article.response.docs[0].keywords[0].name[0].isDefined()
+        holder.entrepreneurs.isChecked=article.response.docs[0].keywords[0].name[0].isDefined()
 
 
-        holder.view.apply {
 
 
-            setOnClickListener{
-                onItemClickListener?.let { it(article) }
-            }
 
 
-        }
+
+
+
 
 
     }
 
 
 
-    private fun it(article: Result) {
+
+    private fun it(article:SearchTitle) {
 
     }
 
@@ -76,10 +71,10 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     }
     class SearchHolder(val view: View): RecyclerView.ViewHolder(view) {
 
-        val beginDate=view.findViewById<TextInputEditText>(R.id.begin_date)
+        val beginDate=view.findViewById<TextView>(R.id.begin_date)
         val endDate=view.findViewById<TextInputEditText>(R.id.end_date)
         val button=view.findViewById<Button>(R.id.search_query_button)
-        val arts=view.findViewById<CheckBox>(R.id.checkbox_arts)
+        val arts: CheckBox =view.findViewById<CheckBox>(R.id.checkbox_arts)
         val politics=view.findViewById<CheckBox>(R.id.checkbox_politics)
         val business=view.findViewById<CheckBox>(R.id.checkbox_business)
         val sports=view.findViewById<CheckBox>(R.id.checkbox_sports)
@@ -90,12 +85,12 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
 
     }
 
-    private val differCallBack =object : DiffUtil.ItemCallback<Result>(){
-        override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
-            return oldItem.url == newItem.url
+    private val differCallBack =object : DiffUtil.ItemCallback<SearchTitle>(){
+        override fun areItemsTheSame(oldItem: SearchTitle, newItem:SearchTitle): Boolean {
+            return oldItem.status == newItem.status
         }
 
-        override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+        override fun areContentsTheSame(oldItem:SearchTitle, newItem:SearchTitle): Boolean {
             return oldItem==newItem
         }
 
@@ -104,11 +99,12 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     val differ= AsyncListDiffer(this,differCallBack)
 
 
-    private var onItemClickListener:((Result)-> Unit)?=null
+    private var onItemClickListener:((SearchTitle)-> Unit)?=null
 
-    fun setOnItemClickListen(listener:(Result) -> Unit){
+    fun setOnItemClickListen(listener:(SearchTitle) -> Unit){
         onItemClickListener =listener
     }
 
 
 }
+

@@ -11,12 +11,25 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface SearchApi {
-    @GET("search/v2/articlesearch.json")
 
-    suspend fun getSearchArticles(
-        @Query("api-key")
-        apiKey:String= Constants.APİ_KEY
+        @GET("search/v2/articlesearch.json")
+        fun getArticleSearch(
+                @Query("q")
+                query: String,
+                @Query("begin_date")
+                beginDate: String,
+                @Query("end_date")
+                endDate: String,
+                @Query("fq")
+                filterQuery: String,
+                @Query("api-key")
+                apiKey:String= Constants.APİ_KEY
+
+        ): Response<SearchTitle>
 
 
-    ): Response<SearchTitle>
+
+
+
+
 }

@@ -1,5 +1,7 @@
 package com.example.mynews2.Model.SearchArticle
 
+import java.io.Serializable
+
 data class Legacy(
     val thumbnail: String,
     val thumbnailheight: Int,
@@ -10,4 +12,4 @@ data class Legacy(
     val xlarge: String,
     val xlargeheight: Int,
     val xlargewidth: Int
-)
+):Serializable

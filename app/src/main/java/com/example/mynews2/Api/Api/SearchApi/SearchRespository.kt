@@ -9,6 +9,11 @@ import retrofit2.Response
 
 class SearchRespository{
     suspend fun getSearchArticles(): Response<SearchTitle> {
-        return SearchInstance.api.getSearchArticles()
+        return SearchInstance.api.getArticleSearch(
+            query = String(),
+            beginDate = String(),
+            endDate = String(),
+            filterQuery = String()
+        )
     }
 }

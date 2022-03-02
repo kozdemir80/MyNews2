@@ -17,6 +17,7 @@ import kotlin.NullPointerException
 
 class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(){
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BusinessNewsHolder {
         return BusinessNewsHolder(
             LayoutInflater.from(parent.context).inflate
@@ -34,9 +35,6 @@ class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(
             holder.dView.text= article.title
             holder.date.text=article.published_date
 
-            setOnClickListener{
-                onItemClickListener?.let { it(article) }
-            }
 
 
         }
@@ -76,11 +74,7 @@ class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(
     val differ= AsyncListDiffer(this,differCallBack)
 
 
-    private var onItemClickListener:((Result)-> Unit)?=null
 
-    fun setOnItemClickListen(listener:(Result) -> Unit){
-        onItemClickListener =listener
-    }
 
 
 }

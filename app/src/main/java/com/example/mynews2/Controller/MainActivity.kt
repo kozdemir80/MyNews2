@@ -1,28 +1,17 @@
 package com.example.mynews2.Controller
 
+import android.content.ClipData
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
-
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.fragment.app.Fragment
+import androidx.core.view.get
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.R
-import com.example.mynews2.View.Adapters.NewsAdapter
-
-
 import com.example.mynews2.View.Adapters.ViewPagerAdapter
-import com.example.mynews2.View.Fragments.Most_Popular
-
-
-
-
 import com.example.mynews2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -87,6 +76,21 @@ class MainActivity : AppCompatActivity() {
         if (toggle.onOptionsItemSelected(item)){
             return true
         }
+        when (item.itemId) {
+            R.id.app_bar_search -> {
+
+                val searchActivity = Intent(this@MainActivity, SearchActivity::class.java)
+                startActivity(searchActivity)
+            }
+
+        }
+        when(item.itemId) {
+            R.id.notificationsFragment -> {
+               val mNotifications=Intent(this@MainActivity,Notifications::class.java)
+                startActivity(mNotifications)
+            }
+            else-> return super.onOptionsItemSelected(item)
+        }
         return super.onOptionsItemSelected(item)
     }
 
@@ -94,6 +98,7 @@ class MainActivity : AppCompatActivity() {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.new_menu, menu)
         menuInflater.inflate(R.menu.search_view,menu)
+
 
 
         return super.onCreateOptionsMenu(menu)

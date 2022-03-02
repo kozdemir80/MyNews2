@@ -11,7 +11,7 @@ import retrofit2.Response
 class BusinessViewModel(private val respository: BusinessRespository): ViewModel(){
     val myResponse: MutableLiveData<Response<BusinessArticle>> = MutableLiveData()
 
-    fun getMostPopularNews(){
+    fun getBusinessNews(){
         viewModelScope.launch {
             val response: Response<BusinessArticle> = respository.getBusinessNews()
             myResponse.value=response

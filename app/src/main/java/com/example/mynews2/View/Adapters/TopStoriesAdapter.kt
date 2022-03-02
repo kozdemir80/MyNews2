@@ -22,7 +22,7 @@ class TopStoriesAdapter() :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
         fun onItemClick(position: Int)
     }
 
-    fun setOnItemClickListener(listener:TopStoriesAdapter.onItemClickListener){
+    fun setOnItemClickListener(listener:onItemClickListener){
         mListener=listener
     }
 
@@ -40,7 +40,8 @@ class TopStoriesAdapter() :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
         holder.view.apply {
          try {
 
-          Glide.with(this).load(article.multimedia[0].url_).into(holder.imageView)}catch (e:NullPointerException){}
+          Glide.with(this).load(article.multimedia[0].url_).into(holder.imageView)}
+            catch (e:NullPointerException){}
             holder.titleView.text=article.section
             holder.dView.text= article.title
             holder.date.text=article.published_date
@@ -83,11 +84,13 @@ class TopStoriesAdapter() :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
     }
 
     private val differCallBack =object : DiffUtil.ItemCallback<com.example.mynews2.Model.TopStories.Result>(){
-        override fun areItemsTheSame(oldItem: com.example.mynews2.Model.TopStories.Result, newItem: com.example.mynews2.Model.TopStories.Result): Boolean {
+        override fun areItemsTheSame(oldItem: com.example.mynews2.Model.TopStories.Result,
+                                     newItem: com.example.mynews2.Model.TopStories.Result): Boolean {
             return oldItem.url == newItem.url
         }
 
-        override fun areContentsTheSame(oldItem: com.example.mynews2.Model.TopStories.Result, newItem: com.example.mynews2.Model.TopStories.Result): Boolean {
+        override fun areContentsTheSame(oldItem: com.example.mynews2.Model.TopStories.Result,
+                                        newItem: com.example.mynews2.Model.TopStories.Result): Boolean {
             return oldItem==newItem
         }
 

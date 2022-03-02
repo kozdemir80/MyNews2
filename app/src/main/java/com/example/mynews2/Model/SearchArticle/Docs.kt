@@ -1,6 +1,8 @@
 package com.example.mynews2.Model.SearchArticle
 
-data class Doc(
+import java.io.Serializable
+
+data class Docs(
     val _id: String,
     val `abstract`: String,
     val byline: Byline,
@@ -19,4 +21,4 @@ data class Doc(
     val uri: String,
     val web_url: String,
     val word_count: Int
-)
+):Serializable

@@ -42,7 +42,7 @@ class Business_Fragment : Fragment(R.layout.bussiness) {
         val repository= BusinessRespository()
         val businessViewModelFactory= BusinessViewModelFactory(repository)
         businessViewModel=ViewModelProvider(this,businessViewModelFactory).get(BusinessViewModel::class.java)
-        businessViewModel.getMostPopularNews()
+        businessViewModel.getBusinessNews()
         businessViewModel.myResponse.observe(viewLifecycleOwner, Observer { response->
             if (response.isSuccessful){
                 Log.d("myResponse",response.body()?.copyright.toString())

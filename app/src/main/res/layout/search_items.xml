@@ -41,6 +41,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            style="@android:style/Widget.Spinner"
             android:layout_weight="1"
             android:hint="@string/begin_date_hint"
             app:boxBackgroundColor="@android:color/transparent">
@@ -49,7 +50,7 @@
                 android:id="@+id/begin_date"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableEnd="@drawable/ic_baseline_calendar_today_24"
+
                 android:focusable="false"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -133,15 +134,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <androidx.appcompat.widget.SwitchCompat
-        android:id="@+id/switch_notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/enable_notification"
-        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/search_query_button"

@@ -1,5 +1,7 @@
 package com.example.mynews2.Model.SearchArticle
 
+import java.io.Serializable
+
 data class Person(
     val firstname: String,
     val lastname: String,
@@ -9,4 +11,4 @@ data class Person(
     val rank: Int,
     val role: String,
     val title: Any
-)
+):Serializable

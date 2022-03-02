@@ -1,5 +1,7 @@
 package com.example.mynews2.View.Fragments
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -20,10 +22,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.MostPopularApi.Repository
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.NewsAdapter
+import com.example.mynews2.View.Adapters.TopStoriesAdapter
 import com.example.mynews2.ViewModel.MostPopularViewModel
 import com.example.mynews2.ViewModel.ViewModelFactory
-
-
+import java.lang.UnsupportedOperationException
 
 
 class Most_Popular:Fragment(R.layout.most_popular) {
@@ -45,8 +47,7 @@ class Most_Popular:Fragment(R.layout.most_popular) {
 
         newsAdapter=NewsAdapter()
 
-
-
+      
 
         newsAdapter= NewsAdapter()
         recyclerView.adapter=newsAdapter
