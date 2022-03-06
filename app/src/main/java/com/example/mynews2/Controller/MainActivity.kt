@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.ViewPagerAdapter
+
 import com.example.mynews2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 

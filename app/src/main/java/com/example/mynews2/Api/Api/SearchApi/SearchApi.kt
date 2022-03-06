@@ -13,7 +13,7 @@ import retrofit2.http.Query
 interface SearchApi {
 
         @GET("search/v2/articlesearch.json")
-        fun getArticleSearch(
+      suspend fun getArticleSearch(
                 @Query("q")
                 query: String,
                 @Query("begin_date")

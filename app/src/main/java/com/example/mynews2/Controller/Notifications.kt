@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.example.mynews2.Model.TopStories.Result
 import com.example.mynews2.R
 import com.example.mynews2.R.id.switch_notification
 import com.example.mynews2.View.Adapters.BusinessAdapter
@@ -30,7 +31,7 @@ class Notifications: AppCompatActivity() {
 
         val notification=NotificationCompat.Builder(this,CHANNEL_ID)
             .setContentTitle("My News")
-            .setContentText(adapter.differ.currentList.size.toString())
+            .setContentText(adapter.differ.currentList.get(0).abstract)
             .setSmallIcon(androidx.core.R.drawable.notification_tile_bg)
             .build()
 

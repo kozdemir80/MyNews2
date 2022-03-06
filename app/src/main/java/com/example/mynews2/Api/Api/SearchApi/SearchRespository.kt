@@ -7,8 +7,9 @@ import com.example.mynews2.Model.Business.BusinessArticle
 import com.example.mynews2.Model.SearchArticle.SearchTitle
 import retrofit2.Response
 
-class SearchRespository{
+class SearchRespository {
     suspend fun getSearchArticles(): Response<SearchTitle> {
+
         return SearchInstance.api.getArticleSearch(
             query = String(),
             beginDate = String(),
