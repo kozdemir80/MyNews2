@@ -1,9 +1,14 @@
 package com.example.mynews2.Controller
 
 import android.app.DatePickerDialog
+import android.content.ContentValues.TAG
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.EditText
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.contains
@@ -21,6 +26,7 @@ import com.example.mynews2.View.Adapters.SearchAdapter
 import com.example.mynews2.ViewModel.SearchNewsViewModel
 import com.example.mynews2.ViewModel.SearchViewModelFactory
 import com.example.mynews2.databinding.SearchItemsBinding
+import com.google.android.material.datepicker.MaterialDatePicker
 
 
 import kotlinx.coroutines.Job
@@ -31,12 +37,13 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var searchNewsViewModel: SearchNewsViewModel
     private lateinit var searchAdapter: SearchAdapter
     private lateinit var recyclerView: RecyclerView
     private lateinit var searchView: EditText
     private lateinit var binding:SearchItemsBinding
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_items)
@@ -78,30 +85,66 @@ class SearchActivity : AppCompatActivity() {
 
         }
 
+        val dateRangePicker=MaterialDatePicker.Builder
+            .datePicker()
+            .setTitleText("Select Date")
+            .build()
+        val endDateRangePicker=MaterialDatePicker.Builder
+            .datePicker()
+            .setTitleText("Select Date")
+            .build()
 
-        val c =Calendar.getInstance()
-        val year=c.get(Calendar.YEAR)
-        val month=c.get(Calendar.MONTH)
-        val dayOfMonth=c.get(Calendar.DAY_OF_MONTH)
-        val myFormat="dd-MM-yyy"
-        val sdf=SimpleDateFormat(myFormat,Locale.FRANCE)
-        binding.beginDate.setOnClickListener() {
-            val dpd = DatePickerDialog(
-                this,
-                { view, mYear, mMonth, mDayofMonth ->
+            binding.beginDate.setOnClickListener {
+                dateRangePicker.show(supportFragmentManager, dateRangePicker.toString())
+            }
+        dateRangePicker.addOnPositiveButtonClickListener {
+            val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+            val date=sdf.format(it)
+            binding.beginDate.setText(date.toString())
 
-                },year, month, dayOfMonth)
-            dpd.show()
-            binding.beginDate.setText(sdf.format(c.time))
         }
-        binding.endDate.setOnClickListener(){
-            val dpd=DatePickerDialog(this, { view, mYear, mMonth, mDayofMonth ->
+        binding.endDate.setOnClickListener {
+            endDateRangePicker.show(supportFragmentManager,endDateRangePicker.toString())
 
-            },year, month, dayOfMonth)
-            dpd.show()
-            binding.endDate.setText(sdf.format(c.time))
+        }
+        endDateRangePicker.addOnPositiveButtonClickListener() {
+            val sdf = SimpleDateFormat("yyyy/MM/dd", Locale.getDefault())
+            val eDate=sdf.format(it)
+            binding.endDate.setText(eDate.toString())
         }
 
+
+
+
+    }
+
+    override fun onClick(p0: View?) {
+        binding.checkboxArts.let {
+            it.setOnClickListener(this)
+            it.tag="arts"
+
+        }
+
+        binding.checkboxBusiness.let {
+            it.setOnClickListener(this)
+            it.tag = "business"
+        }
+            binding.checkboxEntrepreneurs.let {
+                it.setOnClickListener(this)
+                it.tag="entrepreneurs"
+            }
+            binding.checkboxPolitics.let {
+                it.setOnClickListener(this)
+                it.tag="politics"
+            }
+            binding.checkboxSports.let {
+                it.setOnClickListener(this)
+                it.tag="sports"
+            }
+            binding.checkboxTravel.let {
+                it.setOnClickListener(this)
+                it.tag="travel"
+            }
 
     }
 
