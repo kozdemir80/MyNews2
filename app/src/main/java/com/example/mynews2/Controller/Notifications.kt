@@ -46,17 +46,7 @@ class Notifications: AppCompatActivity(), View.OnClickListener {
         adapter= SearchAdapter()
 
 
-        var job: Job? = null
-        binding.queryTerm1.addTextChangedListener {editable->
-            job?.cancel()
-            job= MainScope().launch {
-                delay(Constants.Delay)
-                editable?.let {
-                    if (editable.toString().isNotEmpty())
-                        searchNewsViewModel.getSearchNews()
-                }
-            }
-        }
+
 
         val notification=NotificationCompat.Builder(this,CHANNEL_ID)
             .setContentTitle("My News")

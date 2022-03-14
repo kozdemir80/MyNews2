@@ -7,10 +7,10 @@ import java.util.*
 
 class SearchRespository {
     suspend fun getSearchArticles(
-        query: String.Companion,
-        beginDate:Date,
-        endDate: Date,
-        filterQuery: String.Companion
+        query: String,
+        beginDate:String,
+        endDate: String,
+        filterQuery: String
     ): Response<SearchTitle> {
 
         return SearchInstance.api.getArticleSearch(query,beginDate,endDate, filterQuery)

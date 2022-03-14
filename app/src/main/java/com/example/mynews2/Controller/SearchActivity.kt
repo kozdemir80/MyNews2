@@ -57,7 +57,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                 delay(Constants.Delay)
                 editable?.let {
                     if (editable.toString().isNotEmpty())
-                        searchNewsViewModel.getSearchNews()
+                        searchNewsViewModel.getSearchNews(query = String(), beginDate = String(), endDate = String(), filterQuery = String())
                 }
             }
         }
@@ -75,19 +75,19 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         val repository= SearchRespository()
         val searViewModelFactory= SearchViewModelFactory(repository)
         searchNewsViewModel= ViewModelProvider(this,searViewModelFactory).get(SearchNewsViewModel::class.java)
-        searchNewsViewModel.getSearchNews()
+
         searchNewsViewModel.searchResponse.observe({ lifecycle }) { response ->
             if (response.isSuccessful) {
-                Log.d("myResponse", response.body()?.copyright.toString())
-                Log.d("myResponse", response.body()?.status.toString())
-                Log.d("myResponse", response.body()?.response?.docs?.get(0)?.section_name.toString())
+                Log.d("sResponse",searchAdapter.differ.currentList[0].copyright)
+                Log.d("sResponse", searchAdapter.differ.currentList[0].status)
+                Log.d("sResponse", searchAdapter.differ.currentList[0].response.docs[0].web_url)
 
                 response.body()?.let { searchResponse ->
                     searchAdapter.differ.currentList[0].response.docs[0].abstract
 
                 }
             } else {
-                response.errorBody()?.let { Log.d("sResponse", it.string()) }
+                response.errorBody()?.let { Log.d("eResponse", it.string()) }
             }
 
         }

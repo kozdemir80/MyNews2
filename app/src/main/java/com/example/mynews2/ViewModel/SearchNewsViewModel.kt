@@ -11,9 +11,9 @@ import java.util.*
 
 class SearchNewsViewModel(private val respository: SearchRespository):ViewModel() {
     val searchResponse: MutableLiveData<Response<SearchTitle>> = MutableLiveData()
-    fun getSearchNews()=
+    fun getSearchNews(query:String,beginDate:String,endDate: String,filterQuery:String)=
         viewModelScope.launch {
-            val response: Response<SearchTitle> = respository.getSearchArticles(query = String, beginDate = Date(), endDate = Date(), filterQuery = String)
+            val response: Response<SearchTitle> = respository.getSearchArticles(query,beginDate,endDate,filterQuery)
             searchResponse.value = response
         }
 
