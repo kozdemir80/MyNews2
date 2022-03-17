@@ -46,7 +46,7 @@ class Most_Popular:Fragment(R.layout.most_popular) {
         recyclerView=view.findViewById(R.id.recyclerData)
 
         newsAdapter=NewsAdapter()
-
+        recyclerView= RecyclerView(requireActivity())
       
 
         newsAdapter= NewsAdapter()

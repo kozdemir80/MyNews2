@@ -2,6 +2,9 @@ package com.example.mynews2.Controller
 
 
 import android.annotation.SuppressLint
+import android.content.Intent
+import android.location.Location
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -11,12 +14,15 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.*
+import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.SearchApi.SearchRespository
 import com.example.mynews2.Constants.Constants
+import com.example.mynews2.Model.SearchArticle.SearchTitle
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.SearchAdapter
+import com.example.mynews2.View.Fragments.Search_Fragment
 import com.example.mynews2.ViewModel.SearchNewsViewModel
 import com.example.mynews2.ViewModel.SearchViewModelFactory
 import com.example.mynews2.databinding.SearchItemsBinding
@@ -45,8 +51,8 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.search_items)
         binding = SearchItemsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        searchResult()
 
-        searchAdapter= SearchAdapter()
         recyclerView=RecyclerView(applicationContext)
         searchView=binding.queryTerm
 
@@ -57,7 +63,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                 delay(Constants.Delay)
                 editable?.let {
                     if (editable.toString().isNotEmpty())
-                        searchNewsViewModel.getSearchNews(query = String(), beginDate = String(), endDate = String(), filterQuery = String())
+                        searchNewsViewModel.getSearchNews(query = "Arts", beginDate = "20220226", endDate = "20220301", filterQuery ="Android")
                 }
             }
         }
@@ -75,15 +81,16 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         val repository= SearchRespository()
         val searViewModelFactory= SearchViewModelFactory(repository)
         searchNewsViewModel= ViewModelProvider(this,searViewModelFactory).get(SearchNewsViewModel::class.java)
-
+         searchNewsViewModel.getSearchNews(query = "Arts", beginDate = "20220301", endDate ="20220227", filterQuery = "Europe")
         searchNewsViewModel.searchResponse.observe({ lifecycle }) { response ->
             if (response.isSuccessful) {
-                Log.d("sResponse",searchAdapter.differ.currentList[0].copyright)
-                Log.d("sResponse", searchAdapter.differ.currentList[0].status)
-                Log.d("sResponse", searchAdapter.differ.currentList[0].response.docs[0].web_url)
+                Log.d("sResponse",response.body()?.copyright.toString())
+                Log.d("sResponse", response.body()?.status.toString())
+
 
                 response.body()?.let { searchResponse ->
-                    searchAdapter.differ.currentList[0].response.docs[0].abstract
+                    searchAdapter.differ.submitList(searchResponse.status
+                    )
 
                 }
             } else {
@@ -106,7 +113,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             }
         dateRangePicker.addOnPositiveButtonClickListener {
 
-            val sdf = SimpleDateFormat("yyyy/MM/dd ", Locale.US)
+            val sdf = SimpleDateFormat("yyyyMMdd ", Locale.US)
             val date=sdf.format(it)
 
 
@@ -118,7 +125,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
 
         }
         endDateRangePicker.addOnPositiveButtonClickListener() {
-            val sdf = SimpleDateFormat("yyyy/MM/dd ", Locale.getDefault())
+            val sdf = SimpleDateFormat("yyyyMMdd ", Locale.getDefault())
             val date=sdf.format(it)
             binding.endDate.setText(date.toString())
         }
@@ -127,7 +134,6 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
 
 
     }
-
     override fun onClick(p0: View?) {
         binding.checkboxArts.let {
             it.setOnClickListener(this)
@@ -155,14 +161,31 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
             it.setOnClickListener(this)
             it.tag = "travel"
         }
+    }
 
+
+
+    private fun searchResult(){
+        onClick(p0 = null)
+        searchNewsViewModel= SearchNewsViewModel(respository = SearchRespository())
+       val result= searchNewsViewModel.getSearchNews(query = "Arts", beginDate = "20220228", endDate = "20220301", filterQuery = "Android")
         binding.searchQueryButton.setOnClickListener {
-
+            val bundle=Bundle()
+            bundle.putString("search",result.toString())
+            bundle.putString("search",onClick(p0 = null).toString())
+            val intent= Intent(this,Search_Fragment::class.java)
+            startActivity(intent,bundle)
+            Log.d("mySearch",result.toString())
         }
     }
 
 
 
+
+}
+
+
+fun <T> AsyncListDiffer<T>.submitList(copyright: String) {
 
 }
 

@@ -4,9 +4,11 @@ package com.example.mynews2.View.Fragments
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.util.Log.*
 import android.view.View
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -34,6 +36,7 @@ class Top_Stories: Fragment(R.layout.top_stories) {
     private lateinit var topViewModel: TopStoriesViewModel
     private lateinit var topAdapter: TopStoriesAdapter
     private lateinit var recyclerView: RecyclerView
+    private lateinit var webView: WebView
 
 
 
@@ -45,22 +48,24 @@ class Top_Stories: Fragment(R.layout.top_stories) {
         recyclerView=view.findViewById(R.id.top_Stories)
         topAdapter= TopStoriesAdapter()
 
+
         topAdapter.setOnItemClickListener(object :TopStoriesAdapter.onItemClickListener{
             override fun onItemClick(position: Int) {
 
 
-                try {
 
-                    val bundle=Bundle().apply {
-                        putSerializable("TopArticle",position)
-                    }
-                    val intent= Intent1(Intent1.ACTION_VIEW)
-                    intent.data= Uri.parse(topAdapter.differ.currentList[0].url)
-                    startActivity(intent,bundle)
 
-                }catch (e:UnsupportedOperationException){
-                    e.printStackTrace()
-                }
+
+                   val bundle=Bundle().apply {
+                      putString("TopArticle",topAdapter.differ.currentList[0].toString())
+
+                   }
+                   val intent=Intent1(activity,com.example.mynews2.View.WebView::class.java)
+                   startActivity(intent,bundle)
+                Log.d("myArticle",bundle.toString())
+
+
+
 
 
             }
