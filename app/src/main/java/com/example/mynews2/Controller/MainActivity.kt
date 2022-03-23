@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.ViewPagerAdapter
+import com.example.mynews2.View.Fragments.Search_Activity
 
 import com.example.mynews2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.app_bar_search -> {
 
-                val searchActivity = Intent(this@MainActivity, SearchActivity::class.java)
+                val searchActivity = Intent(this@MainActivity, Search_Activity::class.java)
                 startActivity(searchActivity)
             }
 

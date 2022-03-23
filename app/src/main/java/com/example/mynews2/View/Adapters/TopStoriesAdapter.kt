@@ -1,5 +1,6 @@
 package com.example.mynews2.View.Adapters
 
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,8 @@ class TopStoriesAdapter() :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
     private lateinit var mListener:onItemClickListener
 
     interface onItemClickListener{
+
+
 
         fun onItemClick(position: Int)
     }

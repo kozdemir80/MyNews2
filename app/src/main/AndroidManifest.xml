@@ -23,11 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-     <activity android:name=".Controller.SearchActivity"
+     <activity android:name=".Controller.Search_Result"
           tools:ignore="Instantiatable"/>
         <activity android:name=".Controller.Notifications"
             tools:ignore="Instantiatable"/>
-        <activity android:name=".View.Fragments.Search_Fragment"
+        <activity android:name=".View.Fragments.Search_Activity"
             tools:ignore="Instantiatable"/>
         <activity android:name=".View.WebView"
             tools:ignore="Instantiatable"/>

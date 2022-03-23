@@ -2,6 +2,8 @@ package com.example.mynews2.View.Fragments
 
 
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +18,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.TopStoriesApi.TopRepository
+import com.example.mynews2.Model.TopStories.Result
 
 
 import com.example.mynews2.R
@@ -49,29 +52,7 @@ class Top_Stories: Fragment(R.layout.top_stories) {
         topAdapter= TopStoriesAdapter()
 
 
-        topAdapter.setOnItemClickListener(object :TopStoriesAdapter.onItemClickListener{
-            override fun onItemClick(position: Int) {
 
-
-
-
-
-                   val bundle=Bundle().apply {
-                      putString("TopArticle",topAdapter.differ.currentList[0].toString())
-
-                   }
-                   val intent=Intent1(activity,com.example.mynews2.View.WebView::class.java)
-                   startActivity(intent,bundle)
-                Log.d("myArticle",bundle.toString())
-
-
-
-
-
-            }
-
-
-        })
 
         recyclerView.adapter=topAdapter
         recyclerView.layoutManager= LinearLayoutManager(activity)
@@ -90,6 +71,26 @@ class Top_Stories: Fragment(R.layout.top_stories) {
                 d("mResponse", response.body()?.results.toString())
                 response.body()?.let { newsResponse ->
                     topAdapter.differ.submitList(newsResponse.results)
+                    val preferences= this.getActivity()?.getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+                    val editor=preferences?.edit()
+
+                    editor?.apply {
+                        putString("myKey", topAdapter.differ.currentList[1].url)
+                    }?.apply()
+
+                    topAdapter.setOnItemClickListener(object :TopStoriesAdapter.onItemClickListener{
+                        override fun onItemClick(position: Int) {
+
+
+                            val intent=Intent1(activity,com.example.mynews2.View.WebView::class.java)
+                            startActivity(intent)
+                            Log.d("myArticle",preferences.toString())
+
+
+                        }
+
+
+                    })
                 }
             }else{
                 d("Response", response.errorBody().toString())

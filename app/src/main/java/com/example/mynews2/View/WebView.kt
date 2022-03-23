@@ -1,11 +1,17 @@
 package com.example.mynews2.View
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.provider.Settings.Global.getString
+import android.provider.Settings.Secure.getString
+import android.provider.Settings.System.getString
 import android.util.Log
 import android.webkit.WebViewClient
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.TypedArrayUtils.getString
 import com.example.mynews2.R
 import com.example.mynews2.databinding.ArticleFragmentBinding
 import com.example.mynews2.databinding.SearchNotificationsBinding
@@ -21,10 +27,12 @@ class WebView: AppCompatActivity() {
         webView = WebView()
         binding.webView.webViewClient = WebViewClient()
 
-        val bundle=Bundle()
+        val preferences= this.getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+        val getData:String?=preferences.getString("myKey",null)
+
         binding.webView.apply {
-            loadUrl(bundle.getString("TopArticle").toString())
-            Log.d("myİntent", bundle.toString())
+           loadUrl(getData.toString())
+            Log.d("myİntent", getData.toString())
         }
     }
 
