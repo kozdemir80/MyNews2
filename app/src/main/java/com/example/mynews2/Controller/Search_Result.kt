@@ -26,7 +26,7 @@ class Search_Result : AppCompatActivity(){
     private lateinit var searchNewsViewModel: SearchNewsViewModel
     private lateinit var searchAdapter: SearchAdapter
     private lateinit var recyclerView: RecyclerView
-    private lateinit var searchView: EditText
+
     private lateinit var binding:SearchFragmentBinding
 
 
@@ -38,26 +38,26 @@ class Search_Result : AppCompatActivity(){
         binding = SearchFragmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        recyclerView=RecyclerView(applicationContext)
 
 
 
 
-        searchAdapter= SearchAdapter()
-        recyclerView.adapter=searchAdapter
-        recyclerView.layoutManager= LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
-        searchAdapter.notifyDataSetChanged()
+
+
+
+
         val preferences=getSharedPreferences("myPreferences", MODE_PRIVATE)
         val query = preferences.getString("myQuery",null).toString()
         val beginDate = preferences.getString("beginD",null).toString()
         val endDate =preferences.getString("endD",null).toString()
-        val filterQuery = preferences.getString("mArts",null).toString()
+        val filterQuery = preferences.getBoolean("mArts", true).toString()
+
+
 
         val repository= SearchRespository()
         val searViewModelFactory= SearchViewModelFactory(repository)
         searchNewsViewModel= ViewModelProvider(this,searViewModelFactory).get(SearchNewsViewModel::class.java)
-
+        searchNewsViewModel.getSearchNews(query = query, beginDate = beginDate, endDate =endDate, filterQuery =filterQuery)
         searchNewsViewModel.searchResponse.observe({ lifecycle }) { response ->
             if (response.isSuccessful) {
                 Log.d("sResponse",response.body()?.copyright.toString())
@@ -65,9 +65,15 @@ class Search_Result : AppCompatActivity(){
 
 
                 response.body()?.let { searchResponse ->
-                    searchAdapter.differ.submitList(searchResponse.response.toString())
+                    recyclerView=findViewById(R.id.search_recycler_view)
+                    searchAdapter= SearchAdapter()
+                    recyclerView=RecyclerView(baseContext)
 
-                    searchNewsViewModel.getSearchNews(query = query,beginDate = beginDate, endDate =endDate, filterQuery =filterQuery)
+                    searchAdapter.differ.submitList(searchResponse.response.toString())
+                    recyclerView.adapter=searchAdapter
+                    recyclerView.layoutManager= LinearLayoutManager(this)
+                    recyclerView.setHasFixedSize(true)
+                    searchAdapter.notifyDataSetChanged()
                 }
             } else {
                 response.errorBody()?.let { Log.d("eResponse", it.string()) }

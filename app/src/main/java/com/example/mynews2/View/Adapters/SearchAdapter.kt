@@ -25,20 +25,11 @@ import java.lang.NullPointerException
 
 
 class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
-    private lateinit var mListener:onItemClickListener
 
-    interface onItemClickListener{
-
-        fun onItemClick(position: Int)
-    }
-
-    fun setOnItemClickListener(listener:onItemClickListener){
-        mListener=listener
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHolder {
         return SearchHolder(
             LayoutInflater.from(parent.context).inflate
-                (R.layout.item_preview,parent,false),mListener
+                (R.layout.item_preview,parent,false)
         )
     }
 
@@ -51,7 +42,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
          holder.view.apply {
              Glide.with(this).load(article.response.docs[0].multimedia[0].url).into(holder.imageView)
              holder.titleView.text = article.response.docs[0].section_name
-             holder.dView.text = article.response.docs[0].abstract
+             holder.dView.text = article.response.docs[0].source
              holder.date.text = article.response.docs[0].pub_date
 
          }}catch (e:NullPointerException){}
@@ -79,7 +70,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
-    class SearchHolder(val view: View,listener: onItemClickListener): RecyclerView.ViewHolder(view) {
+    class SearchHolder(val view: View): RecyclerView.ViewHolder(view) {
 
         val imageView: ImageView = view.findViewById(R.id.ivArticleImage)
 
@@ -87,13 +78,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
         val dView: TextView = view.findViewById(R.id.tvDescription)
         val date: TextView =view.findViewById(R.id.tvPublishedAt)
 
-        init {
 
-            view.setOnClickListener {
-                listener.onItemClick(adapterPosition)
-            }
-
-        }
 
     }
 
@@ -111,9 +96,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     val differ= AsyncListDiffer(this,differCallBack)
 
 
-    private fun AdapterView.OnItemClickListener.onItemClick(adapterPosition: Int) {
 
-    }
 
 }
 
