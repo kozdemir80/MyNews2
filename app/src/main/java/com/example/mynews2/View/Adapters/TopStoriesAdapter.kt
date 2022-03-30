@@ -102,14 +102,13 @@ class TopStoriesAdapter() :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
     val differ= AsyncListDiffer(this,differCallBack)
 
 
-    
+    private fun AdapterView.OnItemClickListener.onItemClick(adapterPosition: Int) {
+
+    }
 
 
 }
 
-private fun AdapterView.OnItemClickListener.onItemClick(adapterPosition: Int) {
-
-}
 
 
 

@@ -9,7 +9,8 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+
+
 
 
 import android.widget.ImageView
@@ -19,9 +20,11 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mynews2.Model.SearchArticle.SearchTitle
+import com.example.mynews2.Model.SearchArticle.Response
+
 import com.example.mynews2.R
-import java.lang.NullPointerException
+
+
 
 
 class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
@@ -36,16 +39,15 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
         val article=differ.currentList[position]
-         try {
+
 
 
          holder.view.apply {
-             Glide.with(this).load(article.response.docs[0].multimedia[0].url).into(holder.imageView)
-             holder.titleView.text = article.response.docs[0].section_name
-             holder.dView.text = article.response.docs[0].source
-             holder.date.text = article.response.docs[0].pub_date
-
-         }}catch (e:NullPointerException){}
+             Glide.with(this).load(article.docs[0].multimedia[0].url).into(holder.imageView)
+         }
+             holder.titleView.text = article.docs[position].section_name
+             holder.dView.text = article.docs[position].lead_paragraph
+             holder.date.text = article.docs[position].pub_date
 
 
 
@@ -62,7 +64,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
 
 
 
-    private fun it(article:SearchTitle) {
+    private fun it(article:Response) {
 
     }
 
@@ -82,12 +84,12 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
 
     }
 
-    private val differCallBack =object : DiffUtil.ItemCallback<SearchTitle>(){
-        override fun areItemsTheSame(oldItem: SearchTitle, newItem:SearchTitle): Boolean {
-            return oldItem.response== newItem.response
+    private val differCallBack =object : DiffUtil.ItemCallback<Response>(){
+        override fun areItemsTheSame(oldItem: Response, newItem:Response): Boolean {
+            return oldItem.docs== newItem.docs
         }
 
-        override fun areContentsTheSame(oldItem:SearchTitle, newItem:SearchTitle): Boolean {
+        override fun areContentsTheSame(oldItem:Response, newItem:Response): Boolean {
             return oldItem==newItem
         }
 

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.SearchApi.SearchRespository
+import com.example.mynews2.Model.SearchArticle.Response
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.SearchAdapter
 import com.example.mynews2.ViewModel.SearchNewsViewModel
@@ -38,7 +39,13 @@ class Search_Result : AppCompatActivity(){
         binding = SearchFragmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        recyclerView=findViewById(R.id.search_recycler_view)
+        searchAdapter= SearchAdapter()
 
+        recyclerView.adapter=searchAdapter
+        recyclerView.layoutManager= LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
+        searchAdapter.notifyDataSetChanged()
 
 
 
@@ -47,17 +54,21 @@ class Search_Result : AppCompatActivity(){
 
 
         val preferences=getSharedPreferences("myPreferences", MODE_PRIVATE)
-        val query = preferences.getString("myQuery",null).toString()
-        val beginDate = preferences.getString("beginD",null).toString()
-        val endDate =preferences.getString("endD",null).toString()
-        val filterQuery = preferences.getBoolean("mArts", true).toString()
+        val query = preferences.getString("myQuery",null)
+        val beginDate = preferences.getString("beginD",null)
+        val endDate =preferences.getString("endD",null)
+        val filterQuery = preferences.getBoolean("mChecked", true)
 
 
 
         val repository= SearchRespository()
         val searViewModelFactory= SearchViewModelFactory(repository)
         searchNewsViewModel= ViewModelProvider(this,searViewModelFactory).get(SearchNewsViewModel::class.java)
-        searchNewsViewModel.getSearchNews(query = query, beginDate = beginDate, endDate =endDate, filterQuery =filterQuery)
+        searchNewsViewModel.getSearchNews(
+            query = query.toString(),
+            beginDate = beginDate.toString(),
+            endDate =endDate.toString(),
+            filterQuery =filterQuery.toString())
         searchNewsViewModel.searchResponse.observe({ lifecycle }) { response ->
             if (response.isSuccessful) {
                 Log.d("sResponse",response.body()?.copyright.toString())
@@ -65,15 +76,11 @@ class Search_Result : AppCompatActivity(){
 
 
                 response.body()?.let { searchResponse ->
-                    recyclerView=findViewById(R.id.search_recycler_view)
-                    searchAdapter= SearchAdapter()
-                    recyclerView=RecyclerView(baseContext)
 
-                    searchAdapter.differ.submitList(searchResponse.response.toString())
-                    recyclerView.adapter=searchAdapter
-                    recyclerView.layoutManager= LinearLayoutManager(this)
-                    recyclerView.setHasFixedSize(true)
-                    searchAdapter.notifyDataSetChanged()
+                    searchAdapter.differ.submitList(searchResponse.response)
+
+
+
                 }
             } else {
                 response.errorBody()?.let { Log.d("eResponse", it.string()) }
@@ -98,9 +105,11 @@ class Search_Result : AppCompatActivity(){
 
 }
 
-private fun <T> AsyncListDiffer<T>.submitList(status: String) {
+private fun <T> AsyncListDiffer<T>.submitList(response: Response) {
 
 }
+
+
 
 
 

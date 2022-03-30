@@ -43,6 +43,7 @@
                 android:layout_height="match_parent"
                 style="@android:style/Widget.Spinner"
                 android:focusable="false"
+
                 tools:ignore="SpeakableTextPresentCheck" />
 
 
@@ -129,8 +130,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="8dp"
-
         android:text="@string/search"
+        android:enabled="false"
         android:textColor="#ffffff"/>
 
 </LinearLayout>

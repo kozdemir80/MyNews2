@@ -1,12 +1,10 @@
 package com.example.mynews2.Controller
 
-import android.content.ClipData
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.view.get
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -88,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         }
         when(item.itemId) {
             R.id.notificationsFragment -> {
-               val mNotifications=Intent(this@MainActivity,Notifications::class.java)
+               val mNotifications=Intent(this@MainActivity,Notification_Activity::class.java)
                 startActivity(mNotifications)
             }
             else-> return super.onOptionsItemSelected(item)

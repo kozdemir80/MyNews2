@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.mynews2.Model.Notifications.Response
 import com.example.mynews2.R
 
 class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.NotificationsNewsHolder>() {
@@ -24,10 +25,10 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
         val article=differ.currentList[position]
         holder.view.apply {
 
-           Glide.with(this).load(article.multimedia[0].url).into(holder.imageView)
-            holder.titleView.text=article.section
-            holder.dView.text= article.title
-            holder.date.text=article.published_date
+           Glide.with(this).load(article.docs[0].multimedia[0].url).into(holder.imageView)
+            holder.titleView.text=article.docs[0].section_name
+            holder.dView.text= article.docs[0].lead_paragraph
+            holder.date.text=article.docs[0].pub_date
 
 
 
@@ -37,7 +38,7 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
 
     }
 
-    private fun it(article: com.example.mynews2.Model.Notifications.Result?) {
+    private fun it(article: com.example.mynews2.Model.Notifications.Response) {
 
     }
 
@@ -58,12 +59,12 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
 
     }
 
-    private val differCallBack =object : DiffUtil.ItemCallback<com.example.mynews2.Model.Notifications.Result>(){
-        override fun areItemsTheSame(oldItem:com.example.mynews2.Model.Notifications.Result , newItem: com.example.mynews2.Model.Notifications.Result): Boolean {
-            return oldItem.url == newItem.url
+    private val differCallBack =object : DiffUtil.ItemCallback<com.example.mynews2.Model.Notifications.Response>(){
+        override fun areItemsTheSame(oldItem:com.example.mynews2.Model.Notifications.Response , newItem: com.example.mynews2.Model.Notifications.Response): Boolean {
+            return oldItem.docs == newItem.docs
         }
 
-        override fun areContentsTheSame(oldItem: com.example.mynews2.Model.Notifications.Result, newItem: com.example.mynews2.Model.Notifications.Result): Boolean {
+        override fun areContentsTheSame(oldItem:Response, newItem: Response): Boolean {
             return oldItem==newItem
         }
 
