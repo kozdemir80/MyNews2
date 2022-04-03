@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mynews2.Model.Notifications.Response
+import com.example.mynews2.Model.Notifications.Doc
+
 import com.example.mynews2.R
 
 class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.NotificationsNewsHolder>() {
@@ -25,10 +26,10 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
         val article=differ.currentList[position]
         holder.view.apply {
 
-           Glide.with(this).load(article.docs[0].multimedia[0].url).into(holder.imageView)
-            holder.titleView.text=article.docs[0].section_name
-            holder.dView.text= article.docs[0].lead_paragraph
-            holder.date.text=article.docs[0].pub_date
+           Glide.with(this).load(article.multimedia[0].url).into(holder.imageView)
+            holder.titleView.text=article.section_name
+            holder.dView.text= article.lead_paragraph
+            holder.date.text=article.pub_date
 
 
 
@@ -59,12 +60,12 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
 
     }
 
-    private val differCallBack =object : DiffUtil.ItemCallback<com.example.mynews2.Model.Notifications.Response>(){
-        override fun areItemsTheSame(oldItem:com.example.mynews2.Model.Notifications.Response , newItem: com.example.mynews2.Model.Notifications.Response): Boolean {
-            return oldItem.docs == newItem.docs
+    private val differCallBack =object : DiffUtil.ItemCallback<Doc>(){
+        override fun areItemsTheSame(oldItem:Doc , newItem: Doc): Boolean {
+            return oldItem.web_url == newItem.web_url
         }
 
-        override fun areContentsTheSame(oldItem:Response, newItem: Response): Boolean {
+        override fun areContentsTheSame(oldItem:Doc, newItem: Doc): Boolean {
             return oldItem==newItem
         }
 

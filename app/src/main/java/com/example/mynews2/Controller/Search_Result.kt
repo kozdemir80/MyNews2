@@ -5,16 +5,20 @@ import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Display
-import android.widget.EditText
+
+
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
-import androidx.recyclerview.widget.AsyncListDiffer
+
+
+
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.SearchApi.SearchRespository
-import com.example.mynews2.Model.SearchArticle.Response
+
+
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.SearchAdapter
 import com.example.mynews2.ViewModel.SearchNewsViewModel
@@ -26,26 +30,20 @@ import com.example.mynews2.databinding.SearchFragmentBinding
 class Search_Result : AppCompatActivity(){
     private lateinit var searchNewsViewModel: SearchNewsViewModel
     private lateinit var searchAdapter: SearchAdapter
-    private lateinit var recyclerView: RecyclerView
-
     private lateinit var binding:SearchFragmentBinding
 
 
-    @SuppressLint("NewApi")
+    @SuppressLint("NewApi", "NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_fragment)
         binding = SearchFragmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        recyclerView=findViewById(R.id.search_recycler_view)
+        binding.searchRecyclerView.findViewById<RecyclerView>(R.id.search_recycler_view)
         searchAdapter= SearchAdapter()
-
-        recyclerView.adapter=searchAdapter
-        recyclerView.layoutManager= LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
-        searchAdapter.notifyDataSetChanged()
+        binding.searchRecyclerView.adapter=SearchAdapter()
+        binding.searchRecyclerView.layoutManager=LinearLayoutManager(this)
 
 
 
@@ -53,11 +51,13 @@ class Search_Result : AppCompatActivity(){
 
 
 
-        val preferences=getSharedPreferences("myPreferences", MODE_PRIVATE)
+
+
+        val preferences=getSharedPreferences("Search Items", MODE_PRIVATE)
         val query = preferences.getString("myQuery",null)
         val beginDate = preferences.getString("beginD",null)
         val endDate =preferences.getString("endD",null)
-        val filterQuery = preferences.getBoolean("mChecked", true)
+        val filterQuery = intent.getBooleanExtra("myCategories", true)
 
 
 
@@ -65,19 +65,22 @@ class Search_Result : AppCompatActivity(){
         val searViewModelFactory= SearchViewModelFactory(repository)
         searchNewsViewModel= ViewModelProvider(this,searViewModelFactory).get(SearchNewsViewModel::class.java)
         searchNewsViewModel.getSearchNews(
-            query = query.toString(),
-            beginDate = beginDate.toString(),
-            endDate =endDate.toString(),
-            filterQuery =filterQuery.toString())
+            query = query!!,
+            beginDate = beginDate!!,
+            endDate =endDate!!,
+            filterQuery = filterQuery.toString()
+        )
         searchNewsViewModel.searchResponse.observe({ lifecycle }) { response ->
             if (response.isSuccessful) {
                 Log.d("sResponse",response.body()?.copyright.toString())
                 Log.d("sResponse", response.body()?.status.toString())
-
+                Log.d("sResponse", response.body()?.response?.docs.toString())
 
                 response.body()?.let { searchResponse ->
 
-                    searchAdapter.differ.submitList(searchResponse.response)
+                    searchAdapter.differ.submitList(searchResponse.response.docs)
+
+
 
 
 
@@ -105,9 +108,13 @@ class Search_Result : AppCompatActivity(){
 
 }
 
-private fun <T> AsyncListDiffer<T>.submitList(response: Response) {
 
-}
+
+
+
+
+
+
 
 
 

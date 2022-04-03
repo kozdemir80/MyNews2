@@ -5,17 +5,12 @@ package com.example.mynews2.View.Fragments
 
 
 import android.content.Intent
-import android.content.SharedPreferences
+
+
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-
-
-import android.view.View
-import android.widget.AdapterView
-import android.widget.CheckBox
-import android.widget.Toast
 
 
 import androidx.appcompat.app.AppCompatActivity
@@ -29,25 +24,25 @@ import com.example.mynews2.databinding.SearchItemsBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
-
- class Search_Activity:AppCompatActivity() {
+class Search_Activity:AppCompatActivity() {
 
     private lateinit var binding:SearchItemsBinding
 
-
+    var categories:ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_items)
         binding = SearchItemsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        filterQuery()
 
 
 
-        val preferences=getSharedPreferences("myPreferences", MODE_PRIVATE)
+
+        val preferences=getSharedPreferences("Search Items", MODE_PRIVATE)
         val editor=preferences.edit()
 
         binding.queryTerm.addTextChangedListener (object :TextWatcher{
@@ -114,33 +109,19 @@ import java.util.*
             }.apply()
         }
 
-       binding.searchQueryButton.setOnClickListener {
-
-            val intent=Intent(this,Search_Result::class.java)
-            startActivity(intent)
-        }
-
-
-
-    }
-
-    private fun filterQuery(){
-        val preferences=getSharedPreferences("myPrefences", MODE_PRIVATE)
-        val editor=preferences.edit()
         binding.checkboxArts.setOnClickListener {
 
             it.tag = "arts"
             if (binding.checkboxArts.isChecked) {
                 binding.checkboxArts.setChecked(true)
                 binding.searchQueryButton.setEnabled(true)
+                categories.add("arts")
 
-                editor.putBoolean("mArts", true)
-                editor.apply()
+
             } else {
                 binding.checkboxArts.setChecked(false)
                 binding.searchQueryButton.setEnabled(false)
-                editor.putBoolean("mArts", false)
-                editor.apply()
+                categories.remove("arts")
             }
         }
 
@@ -149,13 +130,11 @@ import java.util.*
             if (binding.checkboxBusiness.isChecked){
                 binding.checkboxBusiness.setChecked(true)
                 binding.searchQueryButton.setEnabled(true)
-                editor.putBoolean("mBussiness",true)
-                editor.apply()
+                categories.add("business")
             }else{
                 binding.checkboxBusiness.setChecked(false)
                 binding.searchQueryButton.setEnabled(false)
-                editor.putBoolean("mBussiness",false)
-                editor.apply()
+                categories.remove("business")
             }
         }
         binding.checkboxEntrepreneurs.setOnClickListener {
@@ -164,13 +143,11 @@ import java.util.*
             if (binding.checkboxEntrepreneurs.isChecked){
                 binding.checkboxEntrepreneurs.setChecked(true)
                 binding.searchQueryButton.setEnabled(true)
-                editor.putBoolean("mEntre",true)
-                editor.apply()
+                categories.add("entrepreneurs")
             }else{
                 binding.checkboxEntrepreneurs.setChecked(false)
                 binding.searchQueryButton.setEnabled(false)
-                editor.putBoolean("mEntre",false)
-                editor.apply()
+                categories.remove("entrepreneurs")
             }
         }
         binding.checkboxPolitics.setOnClickListener {
@@ -179,13 +156,11 @@ import java.util.*
             if (binding.checkboxPolitics.isChecked){
                 binding.checkboxPolitics.setChecked(true)
                 binding.searchQueryButton.setEnabled(true)
-                editor.putBoolean("mPolitics",true)
-                editor.apply()
+                categories.add("politics")
             }else{
                 binding.checkboxPolitics.setChecked(false)
                 binding.searchQueryButton.setEnabled(false)
-                editor.putBoolean("mPolitics",false)
-                editor.apply()
+                categories.remove("politics")
             }
         }
         binding.checkboxSports.setOnClickListener {
@@ -193,14 +168,12 @@ import java.util.*
             it.tag = "sports"
             if (binding.checkboxSports.isChecked){
                 binding.checkboxSports.setChecked(true)
-                 binding.searchQueryButton.setEnabled(true)
-                editor.putBoolean("mSports",true)
-                editor.apply()
+                binding.searchQueryButton.setEnabled(true)
+                categories.add("sports")
             }else{
                 binding.checkboxSports.setChecked(false)
                 binding.searchQueryButton.setEnabled(false)
-                editor.putBoolean("mSports",false)
-                editor.apply()
+                categories.remove("sports")
             }
         }
         binding.checkboxTravel.setOnClickListener {
@@ -210,18 +183,34 @@ import java.util.*
                 binding.checkboxTravel.setChecked(true)
                 binding.searchQueryButton.setEnabled(true)
 
-                editor.putBoolean("mTravel", true)
-                editor.apply()
+                categories.add("travel")
             } else {
                 binding.checkboxBusiness.setChecked(false)
                 binding.searchQueryButton.setEnabled(false)
-                editor.putBoolean("mTravel", false)
-                editor.apply()
+                categories.remove("travel")
+
 
             }
+
         }
 
+       binding.searchQueryButton.setOnClickListener {
+
+            val intent=Intent(this,Search_Result::class.java)
+                 intent.putExtra("myCategories",categories.toString())
+           Log.d("xox",categories.toString())
+            startActivity(intent)
+        }
+
+
+
     }
+
+
+
+
+
+
 
 
  }

@@ -4,7 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
-        <entry key="app/src/main/res/layout/article_fragment.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/layout/article_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/article_preview.xml" value="0.25" />
         <entry key="app/src/main/res/layout/bussiness.xml" value="0.24114583333333334" />
         <entry key="app/src/main/res/layout/fragment_first_.xml" value="0.24114583333333334" />
@@ -20,6 +20,7 @@
         <entry key="app/src/main/res/layout/search_notifications.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/searchfragment.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/top_stories.xml" value="0.24114583333333334" />
+        <entry key="app/src/main/res/layout/webview_display.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/menu-v11/search_view.xml" value="0.109375" />
         <entry key="app/src/main/res/menu/my_menu.xml" value="0.25" />
         <entry key="app/src/main/res/menu/navdrawer_menu.xml" value="0.24114583333333334" />

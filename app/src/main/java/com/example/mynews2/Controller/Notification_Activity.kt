@@ -2,6 +2,7 @@ package com.example.mynews2.Controller
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -28,6 +29,7 @@ class Notification_Activity: AppCompatActivity() {
      val CHANNEL_ID="channelId"
      val CHANNEL_NAME="channelName"
      val NOTIFICATION_ID=0
+    var nCategories:ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_notifications)
@@ -40,18 +42,21 @@ class Notification_Activity: AppCompatActivity() {
         val myPreferences=getSharedPreferences("myPreferences", MODE_PRIVATE)
         val editor=myPreferences.edit()
 
-
+        val intent=Intent(this,Notifications_Result::class.java)
+        val pendingIntent=PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_CANCEL_CURRENT)
 
         val notification=NotificationCompat.Builder(this,CHANNEL_ID)
             .setContentTitle("")
             .setContentText("Hello World")
             .setSmallIcon(androidx.core.R.drawable.notification_tile_bg)
+            .setContentIntent(pendingIntent)
             .build()
 
         val notificationManager=NotificationManagerCompat.from(this)
 
         binding.switchNotification.setOnClickListener {
             notificationManager.notify(NOTIFICATION_ID,notification)
+            intent.putExtra("nCategories",true)
         }
 
 
@@ -96,21 +101,16 @@ class Notification_Activity: AppCompatActivity() {
     }
 
     private fun notificationQuery(){
-        val preferences=getSharedPreferences("checkPreferences", MODE_PRIVATE)
-        val editor=preferences.edit()
         binding.checkboxArts1.setOnClickListener {
 
             it.tag = "arts"
             if (binding.checkboxArts1.isChecked) {
                 binding.checkboxArts1.setChecked(true)
+                 nCategories.add("arts")
 
-
-                editor.putBoolean("mArts", true)
-                editor.apply()
             } else {
                 binding.checkboxArts1.setChecked(false)
-                editor.putBoolean("mArts", false)
-                editor.apply()
+                nCategories.remove("arts")
             }
         }
 
@@ -118,13 +118,11 @@ class Notification_Activity: AppCompatActivity() {
             it.tag = "business"
             if (binding.checkboxBusiness1.isChecked){
                 binding.checkboxBusiness1.setChecked(true)
+                nCategories.add("business")
 
-                editor.putBoolean("mBussiness",true)
-                editor.apply()
             }else{
                 binding.checkboxBusiness1.setChecked(false)
-                editor.putBoolean("mBussiness",false)
-                editor.apply()
+                nCategories.remove("business")
             }
         }
         binding.checkboxEntrepreneurs1.setOnClickListener {
@@ -132,13 +130,11 @@ class Notification_Activity: AppCompatActivity() {
             it.tag = "entrepreneurs"
             if (binding.checkboxEntrepreneurs1.isChecked){
                 binding.checkboxEntrepreneurs1.setChecked(true)
+                nCategories.add("entrepreneurs")
 
-                editor.putBoolean("mEntre",true)
-                editor.apply()
             }else{
                 binding.checkboxEntrepreneurs1.setChecked(false)
-                editor.putBoolean("mEntre",false)
-                editor.apply()
+                nCategories.remove("entrepreneurs")
             }
         }
         binding.checkboxPolitics1.setOnClickListener {
@@ -146,13 +142,11 @@ class Notification_Activity: AppCompatActivity() {
             it.tag = "politics"
             if (binding.checkboxPolitics1.isChecked){
                 binding.checkboxPolitics1.setChecked(true)
+                nCategories.add("politics")
 
-                editor.putBoolean("mPolitics",true)
-                editor.apply()
             }else{
                 binding.checkboxPolitics1.setChecked(false)
-                editor.putBoolean("mPolitics",false)
-                editor.apply()
+                nCategories.remove("politics")
             }
         }
         binding.checkboxSports1.setOnClickListener {
@@ -160,13 +154,11 @@ class Notification_Activity: AppCompatActivity() {
             it.tag = "sports"
             if (binding.checkboxSports1.isChecked){
                 binding.checkboxSports1.setChecked(true)
+                nCategories.add("sports")
 
-                editor.putBoolean("mSports",true)
-                editor.apply()
             }else{
                 binding.checkboxSports1.setChecked(false)
-                editor.putBoolean("mSports",false)
-                editor.apply()
+                nCategories.remove("sports")
             }
         }
         binding.checkboxTravel1.setOnClickListener {
@@ -174,13 +166,11 @@ class Notification_Activity: AppCompatActivity() {
             it.tag = "travel"
             if (binding.checkboxTravel1.isChecked) {
                 binding.checkboxTravel1.setChecked(true)
+                nCategories.add("travel")
 
-                editor.putBoolean("mTravel", true)
-                editor.apply()
             } else {
                 binding.checkboxBusiness1.setChecked(false)
-                editor.putBoolean("mTravel", false)
-                editor.apply()
+                nCategories.remove("travel")
 
             }
         }

@@ -28,6 +28,7 @@ class Notifications_Result: AppCompatActivity() {
     val CHANNEL_ID="channelId"
     val CHANNEL_NAME="channelName"
     val NOTIFICATION_ID=0
+
     private lateinit var adapter:Notifications_Adapter
     private lateinit var binding: NotificationDisplayBinding
     private lateinit var notificationViewModel: NotificationsViewModel
@@ -48,13 +49,13 @@ class Notifications_Result: AppCompatActivity() {
         adapter.notifyDataSetChanged()
         val preferences=getSharedPreferences("myPreferences", MODE_PRIVATE)
         val mQuery=preferences.getString("myQuery",null)
-        val mArts=preferences.getBoolean("mArts",true).toString()
+        val myCategories=intent.getBooleanExtra("nCategorires",true)
 
 
         val repository= Notifications_Respository()
         val NotificationsViewModelFactory=NotificationsViewModelFactory(repository)
         notificationViewModel=ViewModelProvider(this,NotificationsViewModelFactory).get(NotificationsViewModel::class.java)
-        notificationViewModel.mGetNotifications(query = mQuery.toString(), filterQuery = mArts)
+        notificationViewModel.mGetNotifications(query = mQuery.toString(), filterQuery = myCategories.toString())
         notificationViewModel.myResponse.observe(({ lifecycle }) , Observer { response->
             if (response.isSuccessful){
                 Log.d("Notification_Response",response.body()?.copyright.toString())
@@ -80,6 +81,6 @@ class Notifications_Result: AppCompatActivity() {
 
 }
 
-private fun <T> AsyncListDiffer<T>.submitList(response: T) {
+fun <T> AsyncListDiffer<T>.submitList(response: T) {
 
 }

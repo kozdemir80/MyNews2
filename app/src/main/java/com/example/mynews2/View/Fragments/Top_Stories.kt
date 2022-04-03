@@ -2,25 +2,25 @@ package com.example.mynews2.View.Fragments
 
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+
+
 import android.util.Log.*
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.TopStoriesApi.TopRepository
-
-
+import com.example.mynews2.Controller.WebView
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.TopStoriesAdapter
 import com.example.mynews2.ViewModel.TopStoriesViewModel
 import com.example.mynews2.ViewModel.TopViewModelFactory
-import okhttp3.internal.toImmutableList
+
+
 
 
 import android.content.Intent as Intent1
@@ -38,6 +38,7 @@ class Top_Stories: Fragment(R.layout.top_stories) {
 
 
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -58,41 +59,44 @@ class Top_Stories: Fragment(R.layout.top_stories) {
         val TopViewModelFactory= TopViewModelFactory(topRepository)
         topViewModel= ViewModelProvider(this,TopViewModelFactory).get(TopStoriesViewModel::class.java)
         topViewModel.getTopNews()
-            topViewModel.mResponse.observe(viewLifecycleOwner, Observer { response->
-            if (response.isSuccessful){
-                d("mResponse",response.body()?.copyright.toString())
-                d("mResponse",response.body()?.status.toString())
-                d("mResponse", response.body()?.num_results.toString())
+            topViewModel.mResponse.observe(viewLifecycleOwner) { response ->
+                if (response.isSuccessful) {
+                    d("mResponse", response.body()?.copyright.toString())
+                    d("mResponse", response.body()?.status.toString())
+                    d("mResponse", response.body()?.num_results.toString())
 
-                response.body()?.let { newsResponse ->
-                    topAdapter.differ.submitList(newsResponse.results)
-
-
-
-                    topAdapter.setOnItemClickListener(object :TopStoriesAdapter.onItemClickListener{
-                        override fun onItemClick(position: Int) {
-                            val preferences= activity?.getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
-                            val editor= preferences?.edit()
-                            editor?.apply {
-                                putString("Top_Stories",newsResponse.results[position].url)
-                            }?.apply()
-                            Log.d("Top",newsResponse.results[position].url)
-
-                            val intent=Intent1(activity,com.example.mynews2.View.WebView::class.java)
-                            startActivity(intent)
+                    response.body()?.let { newsResponse ->
+                        topAdapter.differ.submitList(newsResponse.results)
 
 
 
-                        }
+                        topAdapter.setOnItemClickListener(object :
+                            TopStoriesAdapter.onItemClickListener {
+                            override fun onItemClick(position: Int) {
+                                val preferences = activity?.getSharedPreferences(
+                                    "myPreferences",
+                                    Context.MODE_PRIVATE
+                                )
+                                val editor = preferences?.edit()
+                                editor?.putString("Top_Stories",newsResponse.results[position].url)
+                                editor?.apply()
 
 
-                    })
+                                val intent =
+                                    Intent1(activity, WebView::class.java)
+                                startActivity(intent)
+
+
+                            }
+
+
+                        })
+                    }
+                } else {
+                    d("Response", response.errorBody().toString())
                 }
-            }else{
-                d("Response", response.errorBody().toString())
-            }
 
-        })
+            }
 
 
     }
