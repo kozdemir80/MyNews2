@@ -1,5 +1,7 @@
 package com.example.mynews2.Controller
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
@@ -8,28 +10,34 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings.Global.putString
+
+
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.widget.CheckBox
+
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.mynews2.R
-import com.example.mynews2.View.Adapters.Notifications_Adapter
-import com.example.mynews2.databinding.SearchItemsBinding
+
+
 import com.example.mynews2.databinding.SearchNotificationsBinding
+import java.util.*
+import kotlin.collections.ArrayList
 
 class Notification_Activity: AppCompatActivity() {
 
      private lateinit var binding: SearchNotificationsBinding
      private lateinit var switchCompat: SwitchCompat
-     val CHANNEL_ID="channelId"
-     val CHANNEL_NAME="channelName"
-     val NOTIFICATION_ID=0
-    var nCategories:ArrayList<String> = ArrayList()
+     private lateinit var alarmManager: AlarmManager
+     private lateinit var pendingIntent: PendingIntent
+     private val CHANNEL_ID="channelId"
+     private val CHANNEL_NAME="channelName"
+     private val NOTIFICATION_ID=0
+    private var nCategories:ArrayList<String> = ArrayList()
+    @SuppressLint("UnspecifiedImmutableFlag")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_notifications)
@@ -38,6 +46,7 @@ class Notification_Activity: AppCompatActivity() {
         notificationQuery()
         mNotificationChannel()
         switchCompat=findViewById(R.id.switch_notification)
+        setNotificationAlarm()
 
         val myPreferences=getSharedPreferences("myPreferences", MODE_PRIVATE)
         val editor=myPreferences.edit()
@@ -175,6 +184,21 @@ class Notification_Activity: AppCompatActivity() {
             }
         }
 
+    }
+    @SuppressLint("UnspecifiedImmutableFlag")
+    private fun setNotificationAlarm(){
+        val calander= Calendar.getInstance()
+        calander[Calendar.HOUR_OF_DAY]
+        calander[Calendar.MINUTE]
+        calander[Calendar.SECOND]
+        calander[Calendar.MILLISECOND]
+        alarmManager=getSystemService(ALARM_SERVICE) as AlarmManager
+        val intent=Intent(this,Notification_Reciever::class.java)
+        pendingIntent= PendingIntent.getBroadcast(this,0,intent,0)
+        alarmManager.setRepeating(
+            AlarmManager.RTC_WAKEUP,calander.timeInMillis,
+            AlarmManager.INTERVAL_DAY,pendingIntent
+        )
     }
 
 }

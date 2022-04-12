@@ -1,6 +1,6 @@
 package com.example.mynews2.Model.Notifications
 
-data class Doc(
+data class Docs(
     val _id: String,
     val `abstract`: String,
     val byline: Byline,

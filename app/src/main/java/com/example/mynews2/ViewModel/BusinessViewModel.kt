@@ -3,12 +3,12 @@ package com.example.mynews2.ViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mynews2.Api.Api.BusinessApi.BusinessRespository
+import com.example.mynews2.Api.Api.BusinessApi.BusinessRepository
 import com.example.mynews2.Model.Business.BusinessArticle
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class BusinessViewModel(private val respository: BusinessRespository): ViewModel(){
+class BusinessViewModel(private val respository: BusinessRepository): ViewModel(){
     val myResponse: MutableLiveData<Response<BusinessArticle>> = MutableLiveData()
 
     fun getBusinessNews(){

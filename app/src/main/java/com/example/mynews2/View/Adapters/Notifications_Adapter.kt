@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.mynews2.Model.Notifications.Doc
+
+
+import com.example.mynews2.Model.Notifications.Docs
 
 import com.example.mynews2.R
 
@@ -30,8 +32,6 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
             holder.titleView.text=article.section_name
             holder.dView.text= article.lead_paragraph
             holder.date.text=article.pub_date
-
-
 
 
         }
@@ -60,12 +60,12 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
 
     }
 
-    private val differCallBack =object : DiffUtil.ItemCallback<Doc>(){
-        override fun areItemsTheSame(oldItem:Doc , newItem: Doc): Boolean {
+    private val differCallBack =object : DiffUtil.ItemCallback<Docs>(){
+        override fun areItemsTheSame(oldItem:Docs , newItem: Docs): Boolean {
             return oldItem.web_url == newItem.web_url
         }
 
-        override fun areContentsTheSame(oldItem:Doc, newItem: Doc): Boolean {
+        override fun areContentsTheSame(oldItem:Docs, newItem: Docs): Boolean {
             return oldItem==newItem
         }
 

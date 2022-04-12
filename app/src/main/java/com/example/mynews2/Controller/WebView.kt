@@ -31,33 +31,33 @@ class WebView: AppCompatActivity() {
         setContentView(binding.root)
         webView = WebView()
         binding.webView.webViewClient = WebViewClient()
+        topView()
+        bView()
+        popularView()
 
+    }
+    @SuppressLint("SetJavaScriptEnabled")
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun popularView(){
+        val preferences = getSharedPreferences("most_popular", Context.MODE_PRIVATE)
+        val mData: String? = preferences.getString("Most_Popular", null)
         binding.webView.apply {
-            val preferences = getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
-            val getData: String? = preferences.getString("Top_Stories", null)
-            Log.d("myTop", getData.toString())
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             settings.safeBrowsingEnabled = true
-            if (getData != null) {
-                loadUrl(getData)
+            if (mData != null) {
+                loadUrl(mData)
             }
         }
-       binding.webView.apply {
-           val preferences = getSharedPreferences("most_popular", Context.MODE_PRIVATE)
-           val mData: String? = preferences.getString("Most_Popular", null)
-           Log.d("mPopular",mData.toString())
-           settings.javaScriptEnabled = true
-           settings.domStorageEnabled = true
-           settings.safeBrowsingEnabled = true
-           if (mData != null) {
-               loadUrl(mData)
-           }
-       }
+    }
+    @SuppressLint("SetJavaScriptEnabled")
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun bView(){
+        val bPreferences=getSharedPreferences("Business_Data", Context.MODE_PRIVATE)
+        val bData:String?=bPreferences.getString("business",null)
         binding.webView.apply {
-            val preferences=getSharedPreferences("Business_Data", Context.MODE_PRIVATE)
-            val bData:String?=preferences.getString("business",null)
-            Log.d("myBusiness",bData.toString())
+
+
             settings.javaScriptEnabled=true
             settings.domStorageEnabled=true
             settings.safeBrowsingEnabled=true
@@ -65,8 +65,21 @@ class WebView: AppCompatActivity() {
                 loadUrl(bData)
             }
         }
-
-
     }
+    @SuppressLint("SetJavaScriptEnabled")
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun topView(){
+        val mPreferences = getSharedPreferences("top_stories", Context.MODE_PRIVATE)
+        val getData: String? = mPreferences.getString("Top_Stories", null)
+        Log.d("myTop", getData.toString())
+        binding.webView.apply {
 
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.safeBrowsingEnabled = true
+            if (getData != null) {
+                loadUrl(getData)
+            }
+        }
+    }
 }

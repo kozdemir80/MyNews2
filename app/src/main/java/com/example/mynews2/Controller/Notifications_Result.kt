@@ -62,7 +62,7 @@ class Notifications_Result: AppCompatActivity() {
                 Log.d("Notification_Response",response.body()?.status.toString())
                 Log.d("Notification_Response",response.body()?.response.toString())
                 response.body()?.let { newsResponse ->
-                    adapter.differ.submitList(newsResponse.response)
+                    adapter.differ.submitList(newsResponse.response.docs)
 
 
                 }

@@ -74,7 +74,7 @@ class Top_Stories: Fragment(R.layout.top_stories) {
                             TopStoriesAdapter.onItemClickListener {
                             override fun onItemClick(position: Int) {
                                 val preferences = activity?.getSharedPreferences(
-                                    "myPreferences",
+                                    "top_stories",
                                     Context.MODE_PRIVATE
                                 )
                                 val editor = preferences?.edit()
