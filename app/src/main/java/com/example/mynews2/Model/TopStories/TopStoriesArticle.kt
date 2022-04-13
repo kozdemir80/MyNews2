@@ -8,10 +8,10 @@ data class TopStoriesArticle(
     val last_updated: String,
     val num_results: Int,
     val results: List<Result>,
-    val section: String,
+    var section: String,
     val status: String,
 
-): Serializable
+    ): Serializable
 
 data class Result(
     val `abstract`: String,
@@ -25,11 +25,11 @@ data class Result(
     val multimedia: List<Multimedia>,
     val org_facet: List<String>,
     val per_facet: List<String>,
-    val published_date: String,
+    var published_date: String,
     val section: String,
     val short_url: String,
     val subsection: String,
-    val title: String,
+    var title: String,
     val updated_date: String,
     val uri: String,
     val url: String

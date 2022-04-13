@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Controller.MainActivity"
+    tools:context=".viewModelTests.MainActivity"
     android:id="@+id/drawerLayout"
     >
 
@@ -20,6 +20,7 @@
 
 
     <LinearLayout
+        android:id="@+id/hostLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

@@ -1,28 +1,27 @@
-package com.example.mynews2.Controller
+package com.example.mynews2.viewModelTests
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.content.Context
-import android.graphics.Color
-import android.os.Build
+
+
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
+
+
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.Notifications_Api.Notifications_Respository
+import com.example.mynews2.Model.Notifications.Response
 import com.example.mynews2.R
-import com.example.mynews2.R.id.switch_notification
+
+
 import com.example.mynews2.View.Adapters.Notifications_Adapter
 import com.example.mynews2.ViewModel.*
 import com.example.mynews2.databinding.NotificationDisplayBinding
-import com.example.mynews2.databinding.SearchNotificationsBinding
+
+
 
 class Notifications_Result: AppCompatActivity() {
     val CHANNEL_ID="channelId"
@@ -81,6 +80,8 @@ class Notifications_Result: AppCompatActivity() {
 
 }
 
-fun <T> AsyncListDiffer<T>.submitList(response: T) {
+private fun <T> AsyncListDiffer<T>.submitList(response: Response) {
 
 }
+
+

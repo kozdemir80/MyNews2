@@ -1,4 +1,4 @@
-package com.example.mynews2.Controller
+package com.example.mynews2.viewModelTests
 
 import android.annotation.SuppressLint
 import android.content.Context

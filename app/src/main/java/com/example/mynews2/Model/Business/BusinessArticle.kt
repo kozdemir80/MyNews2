@@ -7,6 +7,6 @@ data class BusinessArticle(
     val last_updated: String,
     val num_results: Int,
     val results: List<Result>,
-    val section: String,
+    var section: String,
     val status: String
 ): Serializable

@@ -14,7 +14,7 @@ import android.util.Log
 
 
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mynews2.Controller.Search_Result
+import com.example.mynews2.viewModelTests.Search_Result
 
 
 import com.example.mynews2.R

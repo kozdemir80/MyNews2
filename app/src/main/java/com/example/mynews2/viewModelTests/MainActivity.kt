@@ -1,4 +1,4 @@
-package com.example.mynews2.Controller
+package com.example.mynews2.viewModelTests
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

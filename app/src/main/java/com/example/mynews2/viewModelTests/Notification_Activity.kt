@@ -1,4 +1,4 @@
-package com.example.mynews2.Controller
+package com.example.mynews2.viewModelTests
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,28 +8,29 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings.Global.putString
+
+
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.View
-import android.widget.CheckBox
+
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.mynews2.R
-import com.example.mynews2.View.Adapters.Notifications_Adapter
-import com.example.mynews2.databinding.SearchItemsBinding
+
+
 import com.example.mynews2.databinding.SearchNotificationsBinding
 
 class Notification_Activity: AppCompatActivity() {
 
      private lateinit var binding: SearchNotificationsBinding
      private lateinit var switchCompat: SwitchCompat
-     val CHANNEL_ID="channelId"
-     val CHANNEL_NAME="channelName"
-     val NOTIFICATION_ID=0
-    var nCategories:ArrayList<String> = ArrayList()
+     private val CHANNEL_ID="channelId"
+     private val CHANNEL_NAME="channelName"
+     private val NOTIFICATION_ID=0
+    private var nCategories:ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_notifications)

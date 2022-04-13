@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.BusinessApi.BusinessRespository
-import com.example.mynews2.Controller.WebView
+import com.example.mynews2.viewModelTests.WebView
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.BusinessAdapter
 
