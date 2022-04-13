@@ -14,8 +14,8 @@ import androidx.lifecycle.ViewModelProvider
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.mynews2.Api.Api.BusinessApi.BusinessRespository
-import com.example.mynews2.viewModelTests.WebView
+import com.example.mynews2.Api.Api.BusinessApi.BusinessRepository
+import com.example.mynews2.Controller.WebView
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.BusinessAdapter
 
@@ -48,7 +48,7 @@ class Business_Fragment : Fragment(R.layout.bussiness) {
         recyclerView.setHasFixedSize(true)
         businessAdapter.notifyDataSetChanged()
 
-        val repository= BusinessRespository()
+        val repository= BusinessRepository()
         val businessViewModelFactory= BusinessViewModelFactory(repository)
         businessViewModel=ViewModelProvider(this,businessViewModelFactory).get(BusinessViewModel::class.java)
         businessViewModel.getBusinessNews()

@@ -1,4 +1,4 @@
-package com.example.mynews2.viewModelTests
+package com.example.mynews2.Controller
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

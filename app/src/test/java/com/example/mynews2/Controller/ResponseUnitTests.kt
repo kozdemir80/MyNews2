@@ -1,28 +1,15 @@
-package com.example.mynews2.viewModelTests
+package com.example.mynews2.Controller
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.widget.CheckBox
-import android.widget.EditText
 import com.example.mynews2.Model.Business.BusinessArticle
-import com.example.mynews2.Model.TopStories.Result
-import com.example.mynews2.Model.TopStories.TopStoriesArticle
-import com.example.mynews2.View.Fragments.Search_Activity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.setMain
-import org.junit.Assert.*
-import org.junit.Before
 
 import org.junit.Test
-import org.junit.rules.TestWatcher
-import org.junit.runner.Description
 import org.junit.runner.RunWith
+
+
 import org.junit.runners.JUnit4
 import org.mockito.Mock
-import org.mockito.Mockito
-import java.util.Collections.list
+
+
 
 @RunWith(JUnit4::class)
 class ResponseUnitTests(){

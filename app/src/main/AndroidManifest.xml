@@ -22,7 +22,7 @@
             android:resource="@xml/actions" />
 
         <activity
-            android:name=".viewModelTests.MainActivity"
+            android:name=".Controller.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,19 +31,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".viewModelTests.Search_Result"
+            android:name=".Controller.Search_Result"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".viewModelTests.Notifications_Result"
+            android:name=".Controller.Notifications_Result"
             tools:ignore="Instantiatable" />
         <activity
             android:name=".View.Fragments.Search_Activity"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".viewModelTests.WebView"
+            android:name=".Controller.WebView"
             tools:ignore="Instantiatable" />
         <activity
-            android:name=".viewModelTests.Notification_Activity"
+            android:name=".Controller.Notification_Activity"
             tools:ignore="Instantiatable" />
         <activity android:name=".Controller.Notification_Receiver"
             tools:ignore="Instantiatable" />
