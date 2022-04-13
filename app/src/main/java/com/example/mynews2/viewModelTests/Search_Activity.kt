@@ -10,7 +10,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+
+
 
 
 import androidx.appcompat.app.AppCompatActivity
@@ -198,7 +199,6 @@ class Search_Activity:AppCompatActivity() {
 
             val intent=Intent(this,Search_Result::class.java)
                  intent.putExtra("myCategories",categories.toString())
-           Log.d("xox",categories.toString())
             startActivity(intent)
         }
 

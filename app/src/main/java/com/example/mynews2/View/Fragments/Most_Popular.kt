@@ -73,8 +73,6 @@ class Most_Popular:Fragment(R.layout.most_popular) {
                     newsAdapter.differ.submitList(newsResponse.results)
 
 
-
-
                     newsAdapter.setOnItemClickListener(object : NewsAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
 
@@ -82,13 +80,9 @@ class Most_Popular:Fragment(R.layout.most_popular) {
                             val preferences =
                                 activity?.getSharedPreferences("most_popular", Context.MODE_PRIVATE)
                             val editor = preferences?.edit()
+                                editor?.putString("Most_Popular",newsResponse.results[position].url)
+                                editor?.apply()
 
-                            editor?.apply {
-                                putString(
-                                    "Most_Popular",
-                                    newsAdapter.differ.currentList[position].url
-                                )
-                            }?.apply()
                             val intent = Intent(activity, WebView::class.java)
                             startActivity(intent)
 

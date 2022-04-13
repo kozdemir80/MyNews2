@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
+// testing travis
 
 
 
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.new_menu, menu)
         menuInflater.inflate(R.menu.search_view,menu)

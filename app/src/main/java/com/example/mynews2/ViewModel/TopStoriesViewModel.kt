@@ -8,7 +8,7 @@ import com.example.mynews2.Api.Api.TopStoriesApi.TopRepository
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class TopStoriesViewModel(private val repository: TopRepository): ViewModel(){
+class TopStoriesViewModel(private val repository: TopRepository) : ViewModel(){
     val mResponse: MutableLiveData<Response<TopStoriesArticle>> = MutableLiveData()
 
     fun getTopNews(){

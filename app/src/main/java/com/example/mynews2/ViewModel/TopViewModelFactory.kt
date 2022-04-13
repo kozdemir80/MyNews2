@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.mynews2.Api.Api.TopStoriesApi.TopRepository
 
 class TopViewModelFactory(private val repository: TopRepository): ViewModelProvider.Factory{
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return TopStoriesViewModel(repository) as T
     }
 }
