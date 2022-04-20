@@ -16,12 +16,14 @@ import android.view.ViewGroup
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.allViews
 
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mynews2.Model.SearchArticle.Docs
+import com.example.mynews2.Model.SearchArticle.Multimedia
 import com.example.mynews2.Model.SearchArticle.Response
 
 import com.example.mynews2.R
@@ -42,8 +44,9 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
         val article=differ.currentList[position]
 
+
          holder.view.apply {
-             Glide.with(this).load(article.multimedia[0].url).into(holder.imageView)
+             Glide.with(this).load(article.multimedia.firstOrNull()?.url).into(holder.imageView)
 
              holder.titleView.text = article.section_name
              holder.dView.text = article.headline.main
@@ -67,6 +70,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     private fun it(article:Docs) {
 
     }
+
 
 
     override fun getItemCount(): Int {
@@ -101,4 +105,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
 
 
 }
+
+
+
 

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.TopStoriesApi.TopRepository
+import com.example.mynews2.Controller.TopsWebView
 import com.example.mynews2.Controller.WebView
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.TopStoriesAdapter
@@ -83,7 +84,7 @@ class Top_Stories: Fragment(R.layout.top_stories) {
 
 
                                 val intent =
-                                    Intent1(activity, WebView::class.java)
+                                    Intent1(activity,TopsWebView::class.java)
                                 startActivity(intent)
 
 

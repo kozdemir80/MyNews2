@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.BusinessApi.BusinessRepository
 import com.example.mynews2.Controller.WebView
+import com.example.mynews2.Controller.WebViewBusiness
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.BusinessAdapter
 
@@ -71,7 +72,7 @@ class Business_Fragment : Fragment(R.layout.bussiness) {
                             val editor = preferences?.edit()
                             editor?.putString("business",newsResponse.results[position].url)
                             editor?.apply()
-                            val intent = Intent(activity, WebView::class.java)
+                            val intent = Intent(activity, WebViewBusiness::class.java)
                             startActivity(intent)
 
 

@@ -3,7 +3,8 @@ package com.example.mynews2.View.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+
+
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -55,9 +56,7 @@ class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(
 
     }
 
-    private fun it(article:Result?) {
 
-    }
 
 
     override fun getItemCount(): Int {
@@ -94,9 +93,7 @@ class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(
     val differ= AsyncListDiffer(this,differCallBack)
 
 
-    private fun AdapterView.OnItemClickListener.onItemClick(adapterPosition: Int) {
 
-    }
 
 
 }

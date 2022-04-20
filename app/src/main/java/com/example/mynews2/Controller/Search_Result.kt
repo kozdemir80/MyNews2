@@ -41,7 +41,11 @@ class Search_Result : AppCompatActivity(){
         setContentView(R.layout.search_result)
         binding = SearchResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        searchAdapter=SearchAdapter()
         binding.searchRecyclerView.findViewById<RecyclerView>(R.id.search_recycler_view)
+        binding.searchRecyclerView.adapter=searchAdapter
+        binding.searchRecyclerView.layoutManager=LinearLayoutManager(this)
+        binding.searchRecyclerView.setHasFixedSize(true)
 
 
 
@@ -78,17 +82,9 @@ class Search_Result : AppCompatActivity(){
                 Log.d("sResponse", response.body()?.response?.docs.toString())
 
                 response.body()?.let { searchResponse ->
-                     searchAdapter=SearchAdapter()
+
 
                     searchAdapter.differ.submitList(searchResponse.response.docs)
-                    binding.searchRecyclerView.apply {
-                        layoutManager=LinearLayoutManager(this@Search_Result)
-                        adapter=SearchAdapter()
-
-                    }
-
-
-
 
                 }
             } else {
