@@ -17,7 +17,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: lint.html
-          path: app/build/reports/lint-results-debug.html
+          path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2
 
   unit-test:
     needs: [lint]
