@@ -17,7 +17,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: lint.html
-          path: app/build/reports/lint-results-debug.html
+          path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2
 
   unit-test:
     needs: [lint]
@@ -36,6 +36,24 @@ jobs:
           path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2
 
 
+  instrumentation-test:
+    needs: [unit-test]
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Run integration tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck
+
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: instrumentation_test_report
+          path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2
  
 
 
