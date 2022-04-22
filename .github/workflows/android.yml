@@ -1,10 +1,10 @@
-name: Android Tests
-
+name: Android Test
 on:
   push:
     branches: [ master ]
   pull_request:
     branches: [ master ]
+  workflow_dispatch:
 
 jobs:
   lint:
@@ -13,48 +13,46 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Run Lint
-        run: ./gradlew LintDebug
-
       - name: Upload html test report
         uses: actions/upload-artifact@v2
         with:
           name: lint.html
           path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2/
 
-      unit-test:
-        needs: [ lint ]
-        runs-on: ubuntu-latest
-        steps:
-          - name: Checkout the code
-            uses: actions/checkout@v2
+  unit-test:
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
 
-          - name: Run tests
-            run: ./gradlew test
+      - name: Run tests
+        run: ./gradlew test
 
-          - name: Upload test report
-            uses: actions/upload-artifact@v2
-            with:
-              name: unit_test_report
-              path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit_test_report
+          path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2/
 
- integration-test:
-  needs: [unit-test]
-  runs-on: macos-latest
-  steps:
-    - name: Checkout the code
-      uses: actions/checkout@v2
+  instrumentation-test:
+    needs: [unit-test]
+    runs-on: macos-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
 
-    - name: Run integration tests
-      uses: reactivecircus/android-emulator-runner@v2
-      with:
-        api-level: 29
-        script: ./gradlew connectedCheck
+      - name: Run espresso tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck
 
-    - name: Upload test report
-      uses: actions/upload-artifact@v2
-      with:
-        name: instrumentation_test_report
-        path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2
+      - name: Upload test report
+        uses: actions/upload-artifact@v2
+        with:
+          name: instrumentation_test_report
+          path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2/
+
 
 
