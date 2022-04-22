@@ -54,6 +54,7 @@
 
 
 
+
         <uses-library android:name="com.google.android.maps" />
     </application>
 
