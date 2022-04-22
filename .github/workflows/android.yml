@@ -11,30 +11,32 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v3
-
-      - name: Upload html test report
-        uses: actions/upload-artifact@v3
-        with:
-          name: lint.html
-          path: app/build/reports/lint-results-debug.html
-
-  unit-test:
-    needs: [lint]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Run tests
-        run: ./gradlew test
+      - name: Run Lint
+        run: ./gradlew LintDebug
 
-      - name: Upload test report
+      - name: Upload html test report
         uses: actions/upload-artifact@v2
         with:
-          name: unit_test_report
-          path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2
+          name: lint.html
+          path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2/
 
+      unit-test:
+        needs: [ lint ]
+        runs-on: ubuntu-latest
+        steps:
+          - name: Checkout the code
+            uses: actions/checkout@v2
+
+          - name: Run tests
+            run: ./gradlew test
+
+          - name: Upload test report
+            uses: actions/upload-artifact@v2
+            with:
+              name: unit_test_report
+              path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2
 
  
 
