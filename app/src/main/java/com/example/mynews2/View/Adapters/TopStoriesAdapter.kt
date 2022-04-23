@@ -1,10 +1,12 @@
 package com.example.mynews2.View.Adapters
 
-import android.content.SharedPreferences
+
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+
+
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -14,7 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.mynews2.R
 import java.lang.NullPointerException
 
-class TopStoriesAdapter() :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
+class TopStoriesAdapter :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
 
     private lateinit var mListener:onItemClickListener
 
@@ -57,9 +59,7 @@ class TopStoriesAdapter() :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
 
     }
 
-    private fun it(article: com.example.mynews2.Model.TopStories.Result?) {
 
-    }
 
 
     override fun getItemCount(): Int {
@@ -102,9 +102,7 @@ class TopStoriesAdapter() :RecyclerView.Adapter<TopStoriesAdapter.NewsHolder>(){
     val differ= AsyncListDiffer(this,differCallBack)
 
 
-    private fun AdapterView.OnItemClickListener.onItemClick(adapterPosition: Int) {
 
-    }
 
 
 }
