@@ -42,15 +42,15 @@ data class Result(
     @SerializedName("per_facet")
     val per_facet: List<String>,
     @SerializedName("published_date")
-    val published_date: String,
+    var published_date: String,
     @SerializedName("section")
-    val section: String,
+    var section: String,
     @SerializedName("source")
     val source: String,
     @SerializedName("subsection")
     val subsection: String,
     @SerializedName("title")
-    val title: String,
+    var title: String,
     @SerializedName("type")
     val type: String,
     @SerializedName("updated")

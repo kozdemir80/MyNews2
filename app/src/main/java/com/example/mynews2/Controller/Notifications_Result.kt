@@ -80,8 +80,7 @@ class Notifications_Result: AppCompatActivity() {
 
 }
 
-private fun <T> AsyncListDiffer<T>.submitList(response: Response) {
 
-}
+
 
 
