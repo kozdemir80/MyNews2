@@ -28,7 +28,7 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
         val article=differ.currentList[position]
         holder.view.apply {
 
-           Glide.with(this).load(article.multimedia[0].url).into(holder.imageView)
+           Glide.with(this).load(article.multimedia.firstOrNull()?.url).into(holder.imageView)
             holder.titleView.text=article.section_name
             holder.dView.text= article.lead_paragraph
             holder.date.text=article.pub_date
