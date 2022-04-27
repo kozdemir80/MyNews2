@@ -72,17 +72,12 @@ class Search_Result : AppCompatActivity(){
             if (response.isSuccessful) {
                 Log.d("sResponse",response.body()?.copyright.toString())
                 Log.d("sResponse", response.body()?.status.toString())
-                Log.d("sResponse", response.body()?.response?.docs.toString())
 
                 response.body()?.let { searchResponse ->
-
-
                     searchAdapter.differ.submitList(searchResponse.response.docs)
                     searchAdapter.setOnItemClickListener(object :
                         SearchAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-
-
                             val preferences =
                                 getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
                             val editor = preferences.edit()
@@ -93,14 +88,9 @@ class Search_Result : AppCompatActivity(){
                             val intent =
                                 Intent(this@Search_Result, searchWebView::class.java)
                             startActivity(intent)
-
-
                         }
-
-
                     })
                 }
-
             } else {
                 response.errorBody()?.let { Log.d("eResponse", it.string()) }
             }

@@ -1,12 +1,5 @@
 package com.example.mynews2.View.Adapters
 
-
-
-
-
-
-
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +10,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Model.SearchArticle.Docs
 import com.example.mynews2.R
-import com.squareup.picasso.Picasso
-
-
 class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     private lateinit var mListener:onItemClickListener
 
@@ -38,10 +28,8 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     }
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
         val article=differ.currentList[position]
-         holder.view.apply {
-             if (article.multimedia.isNotEmpty())
-             Picasso.get().load(article.multimedia[0].url).into(holder.imageView)
 
+         holder.view.apply {
              holder.titleView.text = article.section_name
              holder.dView.text = article.headline.main
              holder.date.text = article.pub_date
@@ -53,7 +41,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     }
     class SearchHolder(val view: View,listener: onItemClickListener): RecyclerView.ViewHolder(view) {
 
-        val imageView: ImageView = view.findViewById(R.id.ivArticleImage)
+
 
         val titleView: TextView = view.findViewById(R.id.tvTitle)
         val dView: TextView = view.findViewById(R.id.tvDescription)

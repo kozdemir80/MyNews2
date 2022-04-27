@@ -1,22 +1,13 @@
 package com.example.mynews2.View.Adapters
-
-
-
-
-
-
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Model.Notifications.Docs
 import com.example.mynews2.R
-import com.squareup.picasso.Picasso
 import java.lang.NullPointerException
 
 class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.NotificationsNewsHolder>() {
@@ -36,12 +27,8 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
     }
     override fun onBindViewHolder(holder: NotificationsNewsHolder, position: Int) {
         val article=differ.currentList[position]
-
-
         try {
         holder.view.apply {
-            if (article.multimedia[0].url.isNotEmpty())
-            Picasso.get().load(article.multimedia[0].url).fit().error(R.drawable.ic_launcher_foreground).into(holder.imageView)
             holder.titleView.text=article.section_name
             holder.dView.text= article.headline.main
             holder.date.text=article.pub_date
@@ -52,8 +39,6 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
     }
 
     class NotificationsNewsHolder(val view: View,listener: onItemClickListener): RecyclerView.ViewHolder(view) {
-        val imageView: ImageView = view.findViewById(R.id.ivArticleImage)
-
         val titleView: TextView = view.findViewById(R.id.tvTitle)
         val dView: TextView = view.findViewById(R.id.tvDescription)
         val date: TextView =view.findViewById(R.id.tvPublishedAt)
