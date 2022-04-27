@@ -38,14 +38,9 @@ import com.example.mynews2.ViewModel.ViewModelFactory
 
 
 class Most_Popular:Fragment(R.layout.most_popular) {
-
-
-
     private lateinit var viewModel: MostPopularViewModel
     private lateinit var newsAdapter: NewsAdapter
     private lateinit var recyclerView: RecyclerView
-
-
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,9 +51,6 @@ class Most_Popular:Fragment(R.layout.most_popular) {
         recyclerView.layoutManager=LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
         newsAdapter.notifyDataSetChanged()
-
-
-
         val repository= Repository()
         val viewModelFactory= ViewModelFactory(repository)
         viewModel= ViewModelProvider(this,viewModelFactory).get(MostPopularViewModel::class.java)
@@ -71,37 +63,22 @@ class Most_Popular:Fragment(R.layout.most_popular) {
 
                 response.body()?.let { newsResponse ->
                     newsAdapter.differ.submitList(newsResponse.results)
-
-
                     newsAdapter.setOnItemClickListener(object : NewsAdapter.onItemClickListener {
                         override fun onItemClick(position: Int) {
-
-
                             val preferences =
                                 activity?.getSharedPreferences("most_popular", Context.MODE_PRIVATE)
                             val editor = preferences?.edit()
                                 editor?.putString("Most_Popular",newsResponse.results[position].url)
                                 editor?.apply()
-
                             val intent = Intent(activity, WebView::class.java)
                             startActivity(intent)
-
-
                         }
-
-
                     })
-
-
                 }
             } else {
                 Log.d("Response", response.errorBody().toString())
             }
-
         }
-
-
     }
-
 }
 

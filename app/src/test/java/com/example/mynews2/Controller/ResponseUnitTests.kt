@@ -1,4 +1,4 @@
-package com.example.mynews2.Controller
+package com.example.myNews2.Controller
 
 import com.example.mynews2.Model.Business.BusinessArticle
 import com.example.mynews2.Model.MostPopular.NewsArticle

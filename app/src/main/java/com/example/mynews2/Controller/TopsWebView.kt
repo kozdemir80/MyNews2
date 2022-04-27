@@ -13,7 +13,6 @@ private lateinit var binding: WebviewDisplayBinding
 private lateinit var webView: WebView
 class TopsWebView:AppCompatActivity(){
     @RequiresApi(Build.VERSION_CODES.O)
-    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = WebviewDisplayBinding.inflate(layoutInflater)
@@ -21,12 +20,9 @@ class TopsWebView:AppCompatActivity(){
         webView = WebView()
         binding.webView.webViewClient = WebViewClient()
         val mPreferences = getSharedPreferences("top_stories", Context.MODE_PRIVATE)
-
         binding.webView.apply {
             loadUrl(mPreferences.getString("Top_Stories", null).toString())
-
             }
-
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.mynews2.Model.Notifications
 
+import java.io.Serializable
+
 data class Multimedia(
     val caption: Any,
     val credit: Any,
@@ -12,4 +14,4 @@ data class Multimedia(
     val type: String,
     val url: String,
     val width: Int
-)
+):Serializable

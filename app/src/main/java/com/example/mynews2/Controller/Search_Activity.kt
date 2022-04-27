@@ -1,4 +1,4 @@
-package com.example.mynews2.View.Fragments
+package com.example.mynews2.Controller
 
 
 
@@ -15,7 +15,6 @@ import android.text.TextWatcher
 
 
 import androidx.appcompat.app.AppCompatActivity
-import com.example.mynews2.Controller.Search_Result
 
 
 import com.example.mynews2.R
@@ -32,44 +31,34 @@ class Search_Activity:AppCompatActivity() {
 
     private lateinit var binding:SearchItemsBinding
 
-    var categories:ArrayList<String> = ArrayList()
+    private var categories:ArrayList<String> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_items)
         binding = SearchItemsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-
-
-
         val preferences=getSharedPreferences("Search Items", MODE_PRIVATE)
         val editor=preferences.edit()
 
         binding.queryTerm.addTextChangedListener (object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-              binding.searchQueryButton.setEnabled(false)
+                binding.searchQueryButton.isEnabled = false
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-                val queryTerm=binding.queryTerm.getText().toString()
+                val queryTerm=binding.queryTerm.text.toString()
 
                 editor.apply {
                     putString("myQuery",queryTerm)
                 }.apply()
 
             }
-
             override fun afterTextChanged(p0: Editable?) {
 
             }
-
-
         })
-
-
         val dateRangePicker= MaterialDatePicker.Builder
             .datePicker()
             .setTitleText("Select Date")
@@ -88,8 +77,8 @@ class Search_Activity:AppCompatActivity() {
             val date=sdf.format(it)
 
 
-            binding.beginDate.setText(date.toString())
-            val bData=binding.beginDate.getText().toString()
+            binding.beginDate.text = date.toString()
+            val bData=binding.beginDate.text.toString()
             editor.apply{
                 putString("beginD",bData)
             }.apply()
@@ -100,11 +89,11 @@ class Search_Activity:AppCompatActivity() {
             endDateRangePicker.show(supportFragmentManager,endDateRangePicker.toString())
 
         }
-        endDateRangePicker.addOnPositiveButtonClickListener() {
+        endDateRangePicker.addOnPositiveButtonClickListener {
             val sdf = SimpleDateFormat("yyyyMMdd ", Locale.getDefault())
             val date = sdf.format(it)
-            binding.endDate.setText(date.toString())
-            val eDate = binding.endDate.getText().toString()
+            binding.endDate.text = date.toString()
+            val eDate = binding.endDate.text.toString()
             editor.apply {
                 putString("endD", eDate)
             }.apply()
@@ -114,14 +103,14 @@ class Search_Activity:AppCompatActivity() {
 
             it.tag = "arts"
             if (binding.checkboxArts.isChecked) {
-                binding.checkboxArts.setChecked(true)
-                binding.searchQueryButton.setEnabled(true)
+                binding.checkboxArts.isChecked = true
+                binding.searchQueryButton.isEnabled = true
                 categories.add("arts")
 
 
             } else {
-                binding.checkboxArts.setChecked(false)
-                binding.searchQueryButton.setEnabled(false)
+                binding.checkboxArts.isChecked = false
+                binding.searchQueryButton.isEnabled = false
                 categories.remove("arts")
             }
         }
@@ -129,12 +118,12 @@ class Search_Activity:AppCompatActivity() {
         binding.checkboxBusiness.setOnClickListener {
             it.tag = "business"
             if (binding.checkboxBusiness.isChecked){
-                binding.checkboxBusiness.setChecked(true)
-                binding.searchQueryButton.setEnabled(true)
+                binding.checkboxBusiness.isChecked = true
+                binding.searchQueryButton.isEnabled = true
                 categories.add("business")
             }else{
-                binding.checkboxBusiness.setChecked(false)
-                binding.searchQueryButton.setEnabled(false)
+                binding.checkboxBusiness.isChecked = false
+                binding.searchQueryButton.isEnabled = false
                 categories.remove("business")
             }
         }
@@ -142,12 +131,12 @@ class Search_Activity:AppCompatActivity() {
 
             it.tag = "entrepreneurs"
             if (binding.checkboxEntrepreneurs.isChecked){
-                binding.checkboxEntrepreneurs.setChecked(true)
-                binding.searchQueryButton.setEnabled(true)
+                binding.checkboxEntrepreneurs.isChecked = true
+                binding.searchQueryButton.isEnabled = true
                 categories.add("entrepreneurs")
             }else{
-                binding.checkboxEntrepreneurs.setChecked(false)
-                binding.searchQueryButton.setEnabled(false)
+                binding.checkboxEntrepreneurs.isChecked = false
+                binding.searchQueryButton.isEnabled = false
                 categories.remove("entrepreneurs")
             }
         }
@@ -155,12 +144,12 @@ class Search_Activity:AppCompatActivity() {
 
             it.tag = "politics"
             if (binding.checkboxPolitics.isChecked){
-                binding.checkboxPolitics.setChecked(true)
-                binding.searchQueryButton.setEnabled(true)
+                binding.checkboxPolitics.isChecked = true
+                binding.searchQueryButton.isEnabled = true
                 categories.add("politics")
             }else{
-                binding.checkboxPolitics.setChecked(false)
-                binding.searchQueryButton.setEnabled(false)
+                binding.checkboxPolitics.isChecked = false
+                binding.searchQueryButton.isEnabled = false
                 categories.remove("politics")
             }
         }
@@ -168,12 +157,12 @@ class Search_Activity:AppCompatActivity() {
 
             it.tag = "sports"
             if (binding.checkboxSports.isChecked){
-                binding.checkboxSports.setChecked(true)
-                binding.searchQueryButton.setEnabled(true)
+                binding.checkboxSports.isChecked = true
+                binding.searchQueryButton.isEnabled = true
                 categories.add("sports")
             }else{
-                binding.checkboxSports.setChecked(false)
-                binding.searchQueryButton.setEnabled(false)
+                binding.checkboxSports.isChecked = false
+                binding.searchQueryButton.isEnabled = false
                 categories.remove("sports")
             }
         }
@@ -181,18 +170,16 @@ class Search_Activity:AppCompatActivity() {
 
             it.tag = "travel"
             if (binding.checkboxTravel.isChecked) {
-                binding.checkboxTravel.setChecked(true)
-                binding.searchQueryButton.setEnabled(true)
+                binding.checkboxTravel.isChecked = true
+                binding.searchQueryButton.isEnabled = true
 
                 categories.add("travel")
             } else {
-                binding.checkboxBusiness.setChecked(false)
-                binding.searchQueryButton.setEnabled(false)
+                binding.checkboxBusiness.isChecked = false
+                binding.searchQueryButton.isEnabled = false
                 categories.remove("travel")
 
-
             }
-
         }
 
        binding.searchQueryButton.setOnClickListener {
@@ -201,18 +188,7 @@ class Search_Activity:AppCompatActivity() {
                  intent.putExtra("myCategories",categories.toString())
             startActivity(intent)
         }
-
-
-
     }
-
-
-
-
-
-
-
-
  }
 
 

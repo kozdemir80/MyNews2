@@ -19,18 +19,13 @@ import com.bumptech.glide.Glide
 
 import com.example.mynews2.R
 import com.example.mynews2.Model.MostPopular.Result
+import com.squareup.picasso.Picasso
 import java.lang.NullPointerException
 
 
 class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleNewsHolder>(){
-
-
     private lateinit var mListener:onItemClickListener
-
     interface onItemClickListener{
-
-
-
         fun onItemClick(position: Int)
     }
     fun setOnItemClickListener(listener:onItemClickListener){
@@ -41,73 +36,40 @@ class NewsAdapter:RecyclerView.Adapter<NewsAdapter.ArticleNewsHolder>(){
             (R.layout.item_preview,parent,false),mListener
         )
     }
-
     override fun onBindViewHolder(holder: ArticleNewsHolder, position: Int) {
         val article=differ.currentList[position]
        holder.view.apply {
-
        try {
-
-
-       Glide.with(this).load(article.media[0].mediaMetadata[0].url).into(holder.imageView)}
+         Picasso.get().load(article.media[0].mediaMetadata[0].url).into(holder.imageView)}
        catch (e:NullPointerException){}
-
          holder.titleView.text=article.section
          holder.dView.text= article.title
          holder.date.text=article.published_date
-
-
-
-
        }
-
-
     }
-
-    private fun it(article:Result?) {
-
-    }
-
-
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
-
     class ArticleNewsHolder(val view:View,listener: onItemClickListener): RecyclerView.ViewHolder(view) {
         val imageView: ImageView = view.findViewById(R.id.ivArticleImage)
 
         val titleView: TextView = view.findViewById(R.id.tvTitle)
         val dView: TextView = view.findViewById(R.id.tvDescription)
         val date:TextView=view.findViewById(R.id.tvPublishedAt)
-
-
         init {
-
             view.setOnClickListener {
                 listener.onItemClick(adapterPosition)
             }
-
         }
-
-
     }
-
     private val differCallBack =object : DiffUtil.ItemCallback<Result>(){
         override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
             return oldItem.url == newItem.url
         }
-
         override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
             return oldItem==newItem
         }
-
     }
-
     val differ= AsyncListDiffer(this,differCallBack)
-
-    private fun AdapterView.OnItemClickListener.onItemClick(adapterPosition: Int) {
-
-    }
-
 }
 

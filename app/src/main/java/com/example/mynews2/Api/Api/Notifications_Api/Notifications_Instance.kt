@@ -1,6 +1,6 @@
 package com.example.mynews2.Api.Api.Notifications_Api
 
-import com.example.mynews2.Api.Api.MostPopularApi.NewsApi
+
 import com.example.mynews2.Constants.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

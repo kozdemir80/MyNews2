@@ -8,8 +8,6 @@ import android.os.Build
 
 
 import android.os.Bundle
-import android.util.Log
-
 
 import android.webkit.WebViewClient
 import androidx.annotation.RequiresApi
@@ -31,9 +29,7 @@ class WebView: AppCompatActivity() {
         setContentView(binding.root)
         webView = WebView()
         binding.webView.webViewClient = WebViewClient()
-
         popularView()
-
     }
     @SuppressLint("SetJavaScriptEnabled")
     @RequiresApi(Build.VERSION_CODES.O)
@@ -49,6 +45,4 @@ class WebView: AppCompatActivity() {
             }
         }
     }
-
-
 }

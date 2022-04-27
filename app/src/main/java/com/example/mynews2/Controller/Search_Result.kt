@@ -1,7 +1,11 @@
+@file:Suppress("NAME_SHADOWING")
+
 package com.example.mynews2.Controller
 
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.Intent
 
 
 import android.os.Build
@@ -22,6 +26,8 @@ import com.example.mynews2.Api.Api.SearchApi.SearchRespository
 
 
 import com.example.mynews2.R
+
+
 import com.example.mynews2.View.Adapters.SearchAdapter
 import com.example.mynews2.ViewModel.SearchNewsViewModel
 import com.example.mynews2.ViewModel.SearchViewModelFactory
@@ -47,24 +53,11 @@ class Search_Result : AppCompatActivity(){
         binding.searchRecyclerView.layoutManager=LinearLayoutManager(this)
         binding.searchRecyclerView.setHasFixedSize(true)
 
-
-
-
-
-
-
-
-
-
-
-
         val preferences=getSharedPreferences("Search Items", MODE_PRIVATE)
         val query = preferences.getString("myQuery",null)
         val beginDate = preferences.getString("beginD",null)
         val endDate =preferences.getString("endD",null)
         val filterQuery = intent.getBooleanExtra("myCategories", true)
-
-
 
         val repository= SearchRespository()
         val searViewModelFactory= SearchViewModelFactory(repository)
@@ -85,28 +78,35 @@ class Search_Result : AppCompatActivity(){
 
 
                     searchAdapter.differ.submitList(searchResponse.response.docs)
+                    searchAdapter.setOnItemClickListener(object :
+                        SearchAdapter.onItemClickListener {
+                        override fun onItemClick(position: Int) {
 
+
+                            val preferences =
+                                getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+                            val editor = preferences.edit()
+                            editor.putString("mSearch",
+                                searchResponse.response.docs[position].web_url)
+                            editor.apply()
+
+                            val intent =
+                                Intent(this@Search_Result, searchWebView::class.java)
+                            startActivity(intent)
+
+
+                        }
+
+
+                    })
                 }
+
             } else {
                 response.errorBody()?.let { Log.d("eResponse", it.string()) }
             }
 
         }
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
 
 }
 

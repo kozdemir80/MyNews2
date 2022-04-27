@@ -10,7 +10,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.ViewPagerAdapter
-import com.example.mynews2.View.Fragments.Search_Activity
 
 import com.example.mynews2.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
@@ -26,16 +25,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val adapter= ViewPagerAdapter(supportFragmentManager,lifecycle)
         setContentView(binding.root)
-
-
-
-
-// testing travis
-
-
-
-
-
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.navView) as NavHostFragment?
         val navController: NavController? = navHostFragment?.navController
@@ -43,8 +32,6 @@ class MainActivity : AppCompatActivity() {
         if (navController != null) {
             binding.navView.setupWithNavController(navController)
         }
-
-
         binding.viewPager.adapter=adapter
         TabLayoutMediator(binding.tabLayout,binding.viewPager){tab,position->
             when(position){
@@ -67,10 +54,7 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
    }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
@@ -98,10 +82,6 @@ class MainActivity : AppCompatActivity() {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.new_menu, menu)
         menuInflater.inflate(R.menu.search_view,menu)
-
-
-
         return super.onCreateOptionsMenu(menu)
     }
-
 }
