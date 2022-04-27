@@ -14,6 +14,7 @@ import android.util.Log
 
 
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
 
@@ -92,6 +93,9 @@ class Search_Result : AppCompatActivity(){
                     })
                 }
             } else {
+                val alertPopUp= AlertDialog.Builder(this)
+                    .setMessage("There are no results with your selections, Please select again ")
+                alertPopUp.show()
                 response.errorBody()?.let { Log.d("eResponse", it.string()) }
             }
 

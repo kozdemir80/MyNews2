@@ -27,6 +27,7 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
     }
     override fun onBindViewHolder(holder: NotificationsNewsHolder, position: Int) {
         val article=differ.currentList[position]
+
         try {
         holder.view.apply {
             holder.titleView.text=article.section_name
