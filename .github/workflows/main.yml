@@ -16,10 +16,10 @@ jobs:
         run: ./gradlew LintDebug
 
       - name: Upload html test report
-        uses: actions/upload-artifact@v@v3.0.0
+        uses: actions/upload-artifact@v2
         with:
           name: lint.html
-          path: /Users/ozdemiroz/AndroidStudioProjects/MyNews2/app/build/reports/lint-results-debug.html
+          path:  Users/ozdemiroz/AndroidStudioProjects/MyNews2/app/build/reports/lint-results-debug.html
 
   unit-test:
     needs: [lint]
@@ -32,17 +32,17 @@ jobs:
         run: ./gradlew test
 
       - name: Upload test report
-        uses: actions/upload-artifact@v@v3.0.0
+        uses: actions/upload-artifact@v2
         with:
           name: unit_test_report
-          path:  /Users/ozdemiroz/AndroidStudioProjects/MyNews2/app/build/outputs
+          path:  Users/ozdemiroz/AndroidStudioProjects/MyNews2
 
   instrumentation-test:
     needs: [unit-test]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v@v3.0.0
+        uses: actions/checkout@v2
 
       - name: Run integration tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -51,7 +51,7 @@ jobs:
           script: ./gradlew connectedCheck
 
       - name: Upload test report
-        uses: actions/upload-artifact@v@v3.0.0
+        uses: actions/upload-artifact@v2
         with:
           name: instrumentation_test_report
-          path:  /Users/ozdemiroz/AndroidStudioProjects/MyNews2
+          path:  Users/ozdemiroz/AndroidStudioProjects/MyNews2
