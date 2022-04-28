@@ -1,4 +1,4 @@
-sname: Android Test Report
+name: Android Test Report
 on:
   push:
     branches: [ master ]
