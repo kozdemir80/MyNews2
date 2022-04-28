@@ -27,7 +27,7 @@ import com.example.mynews2.View.Adapters.BusinessAdapter
 import com.example.mynews2.ViewModel.BusinessViewModel
 import com.example.mynews2.ViewModel.BusinessViewModelFactory
 
-
+// Business Fragment for business articles
 class Business_Fragment : Fragment(R.layout.bussiness) {
     private lateinit var businessViewModel: BusinessViewModel
     private lateinit var businessAdapter: BusinessAdapter
@@ -72,5 +72,4 @@ class Business_Fragment : Fragment(R.layout.bussiness) {
             }
         }
     }
-
 }

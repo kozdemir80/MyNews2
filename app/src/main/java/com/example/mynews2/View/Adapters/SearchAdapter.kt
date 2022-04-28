@@ -26,6 +26,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
                 (R.layout.item_preview,parent,false),mListener
         )
     }
+    //Articles which will be displayed in recyclerView
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
         val article=differ.currentList[position]
 
@@ -35,14 +36,12 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
              holder.date.text = article.pub_date
          }
     }
-
+    //Articles size
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
+    //Articles views for recyclerView
     class SearchHolder(val view: View,listener: onItemClickListener): RecyclerView.ViewHolder(view) {
-
-
-
         val titleView: TextView = view.findViewById(R.id.tvTitle)
         val dView: TextView = view.findViewById(R.id.tvDescription)
         val date: TextView =view.findViewById(R.id.tvPublishedAt)
@@ -53,6 +52,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
             }
         }
     }
+    //DiffUtil for items
     private val differCallBack =object : DiffUtil.ItemCallback<Docs>(){
         override fun areItemsTheSame(oldItem:Docs, newItem:Docs): Boolean {
             return oldItem.web_url== newItem.web_url

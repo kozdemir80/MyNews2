@@ -1,34 +1,23 @@
 package com.example.mynews2.View.Adapters
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.mynews2.Model.Business.Result
 import com.example.mynews2.R
 import com.squareup.picasso.Picasso
-
-
 import kotlin.NullPointerException
-
 class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(){
 
     private lateinit var mListener:onItemClickListener
-
     interface onItemClickListener{
-
-
 
         fun onItemClick(position: Int)
     }
-
     fun setOnItemClickListener(listener:onItemClickListener) {
         mListener = listener
     }
@@ -40,6 +29,7 @@ class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(
     }
 
     override fun onBindViewHolder(holder: BusinessNewsHolder, position: Int) {
+        //setting views to be displayed on recyclerview
         val article=differ.currentList[position]
         holder.view.apply {
             try {
@@ -51,9 +41,11 @@ class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(
         }
     }
     override fun getItemCount(): Int {
+        //Articles list size
         return differ.currentList.size
     }
     class BusinessNewsHolder(val view: View,listener: onItemClickListener): RecyclerView.ViewHolder(view) {
+        //views which will be used on recyclerview
         val imageView: ImageView = view.findViewById(R.id.ivArticleImage)
         val titleView: TextView = view.findViewById(R.id.tvTitle)
         val dView: TextView = view.findViewById(R.id.tvDescription)
@@ -64,6 +56,7 @@ class BusinessAdapter: RecyclerView.Adapter<BusinessAdapter.BusinessNewsHolder>(
             }
         }
     }
+    //diffUtil for items
     private val differCallBack =object : DiffUtil.ItemCallback<Result>(){
         override fun areItemsTheSame(oldItem: Result, newItem:Result): Boolean {
             return oldItem.url == newItem.url

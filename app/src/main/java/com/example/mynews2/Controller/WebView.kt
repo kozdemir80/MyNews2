@@ -33,6 +33,7 @@ class WebView: AppCompatActivity() {
     }
     @SuppressLint("SetJavaScriptEnabled")
     @RequiresApi(Build.VERSION_CODES.O)
+    //webView for articles
     private fun popularView(){
         val preferences = getSharedPreferences("most_popular", Context.MODE_PRIVATE)
         val mData: String? = preferences.getString("Most_Popular", null)

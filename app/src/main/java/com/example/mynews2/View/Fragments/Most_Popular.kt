@@ -3,40 +3,20 @@ package com.example.mynews2.View.Fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-
-
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
-
-
 import android.view.View
-
-
-
-
-
-
 import androidx.lifecycle.ViewModelProvider
-
-
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.MostPopularApi.Repository
 import com.example.mynews2.Controller.WebView
 import com.example.mynews2.R
 import com.example.mynews2.View.Adapters.NewsAdapter
-
-
-
-
 import com.example.mynews2.ViewModel.MostPopularViewModel
 import com.example.mynews2.ViewModel.ViewModelFactory
-
-
-
-
+// Most popular fragment to display most popular articles
 class Most_Popular:Fragment(R.layout.most_popular) {
     private lateinit var viewModel: MostPopularViewModel
     private lateinit var newsAdapter: NewsAdapter
@@ -46,7 +26,6 @@ class Most_Popular:Fragment(R.layout.most_popular) {
         super.onViewCreated(view, savedInstanceState)
         newsAdapter=NewsAdapter()
         recyclerView=view.findViewById(R.id.recyclerData)
-
         recyclerView.adapter=newsAdapter
         recyclerView.layoutManager=LinearLayoutManager(activity)
         recyclerView.setHasFixedSize(true)
@@ -81,4 +60,3 @@ class Most_Popular:Fragment(R.layout.most_popular) {
         }
     }
 }
-

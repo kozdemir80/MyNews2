@@ -22,9 +22,10 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationsNewsHolder {
         return NotificationsNewsHolder(
             LayoutInflater.from(parent.context).inflate
-            (R.layout.item_preview,parent,false),mListener
+                (R.layout.item_preview, parent, false), mListener
         )
     }
+    //ArticlesViews which will be displayed on recyclerView
     override fun onBindViewHolder(holder: NotificationsNewsHolder, position: Int) {
         val article=differ.currentList[position]
 
@@ -35,10 +36,11 @@ class Notifications_Adapter: RecyclerView.Adapter<Notifications_Adapter.Notifica
             holder.date.text=article.pub_date
         }}catch (e:NullPointerException){}
     }
+    //Articles size
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
-
+       //Article views for recyclerView
     class NotificationsNewsHolder(val view: View,listener: onItemClickListener): RecyclerView.ViewHolder(view) {
         val titleView: TextView = view.findViewById(R.id.tvTitle)
         val dView: TextView = view.findViewById(R.id.tvDescription)

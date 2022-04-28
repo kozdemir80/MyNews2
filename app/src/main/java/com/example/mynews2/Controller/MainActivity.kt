@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         if (navController != null) {
             binding.navView.setupWithNavController(navController)
         }
+        //tabLayout to access fragments
         binding.viewPager.adapter=adapter
         TabLayoutMediator(binding.tabLayout,binding.viewPager){tab,position->
             when(position){
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
    }
-
+     // to access search and notifications views
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (toggle.onOptionsItemSelected(item)){
             return true
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
     }
-
+    //to show menu items on action bar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.new_menu, menu)

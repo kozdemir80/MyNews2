@@ -19,7 +19,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: lint.html
-          path:  /Users/ozdemiroz/AndroidStudioProjects/MyNews2/app/build/reports/lint-results-debug.html
+          path: /Users/ozdemiroz/Downloads
 
   unit-test:
     needs: [lint]
@@ -35,7 +35,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: unit_test_report
-          path:  /Users/ozdemiroz/AndroidStudioProjects/MyNews2
+          path:/Users/ozdemiroz/Downloads
 
   instrumentation-test:
     needs: [unit-test]
@@ -54,7 +54,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: instrumentation_test_report
-          path:  /Users/ozdemiroz/AndroidStudioProjects/MyNews2
+          path: /Users/ozdemiroz/Downloads
 
 
 

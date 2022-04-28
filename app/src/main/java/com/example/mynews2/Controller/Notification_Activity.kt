@@ -38,7 +38,7 @@ class Notification_Activity: AppCompatActivity() {
 
         val myPreferences=getSharedPreferences("myPreferences", MODE_PRIVATE)
         val editor=myPreferences.edit()
-
+         // switch button
         binding.switchNotification.setOnClickListener {
 
             intent.putExtra("nCategories",true)
@@ -62,7 +62,7 @@ class Notification_Activity: AppCompatActivity() {
             }
         })
     }
-
+     // setting alarm for broadcast receiver
     private fun setAlarm() {
         calendar= Calendar.getInstance()
         calendar[Calendar.DAY_OF_WEEK]
@@ -79,7 +79,7 @@ class Notification_Activity: AppCompatActivity() {
         android.app.AlarmManager.INTERVAL_DAY,pendingIntent)
         savedStateRegistry
     }
-
+     // checkBoxes for user selections
     private fun notificationQuery(){
         binding.checkboxArts1.setOnClickListener {
 
@@ -169,5 +169,3 @@ class Notification_Activity: AppCompatActivity() {
         }
     }
 }
-
-

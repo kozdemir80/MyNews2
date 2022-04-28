@@ -1,32 +1,15 @@
 package com.example.mynews2.Controller
-
-
-
-
-
 import android.content.Intent
-
-
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-
-
-
-
 import androidx.appcompat.app.AppCompatActivity
-
-
 import com.example.mynews2.R
-
-
 import com.example.mynews2.databinding.SearchItemsBinding
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
-
-
 class Search_Activity:AppCompatActivity() {
 
     private lateinit var binding:SearchItemsBinding
@@ -39,7 +22,7 @@ class Search_Activity:AppCompatActivity() {
         setContentView(binding.root)
         val preferences=getSharedPreferences("Search Items", MODE_PRIVATE)
         val editor=preferences.edit()
-
+        // setting addTextChanged listener to enable button
         binding.queryTerm.addTextChangedListener (object :TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
@@ -59,6 +42,7 @@ class Search_Activity:AppCompatActivity() {
 
             }
         })
+        //  date picker dialog for begin and endDate
         val dateRangePicker= MaterialDatePicker.Builder
             .datePicker()
             .setTitleText("Select Date")
@@ -98,7 +82,7 @@ class Search_Activity:AppCompatActivity() {
                 putString("endD", eDate)
             }.apply()
         }
-
+        //checkBoxes for news categories
         binding.checkboxArts.setOnClickListener {
 
             it.tag = "arts"
@@ -190,12 +174,3 @@ class Search_Activity:AppCompatActivity() {
         }
     }
  }
-
-
-
-
-
-
-
-
-

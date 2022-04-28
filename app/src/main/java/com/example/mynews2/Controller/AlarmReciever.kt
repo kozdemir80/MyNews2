@@ -26,7 +26,7 @@ class AlarmManager:BroadcastReceiver(){
 
         val pendingIntent= PendingIntent.getActivity(context,0,intent, PendingIntent.FLAG_UPDATE_CURRENT)
         intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-
+        //setting notifications
         val notification= context?.let {
             NotificationCompat.Builder(it,CHANNEL_ID)
                 .setContentText("You have new articles available")
@@ -51,5 +51,4 @@ class AlarmManager:BroadcastReceiver(){
         }
         notificationManager.notify(NOTIFICATION_ID, notification!!)
     }
-
 }

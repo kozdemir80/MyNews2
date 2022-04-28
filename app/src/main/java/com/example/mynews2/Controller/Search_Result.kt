@@ -53,13 +53,13 @@ class Search_Result : AppCompatActivity(){
         binding.searchRecyclerView.adapter=searchAdapter
         binding.searchRecyclerView.layoutManager=LinearLayoutManager(this)
         binding.searchRecyclerView.setHasFixedSize(true)
-
+       // query, items begin and endDate and categories preferences from search activity
         val preferences=getSharedPreferences("Search Items", MODE_PRIVATE)
         val query = preferences.getString("myQuery",null)
         val beginDate = preferences.getString("beginD",null)
         val endDate =preferences.getString("endD",null)
         val filterQuery = intent.getBooleanExtra("myCategories", true)
-
+        //viewModel and viewModel factory for api response
         val repository= SearchRespository()
         val searViewModelFactory= SearchViewModelFactory(repository)
         searchNewsViewModel= ViewModelProvider(this,searViewModelFactory).get(SearchNewsViewModel::class.java)
@@ -69,6 +69,7 @@ class Search_Result : AppCompatActivity(){
             endDate =endDate!!,
             filterQuery = filterQuery.toString()
         )
+        //observer for response
         searchNewsViewModel.searchResponse.observe({ lifecycle }) { response ->
             if (response.isSuccessful) {
                 Log.d("sResponse",response.body()?.copyright.toString())

@@ -5,8 +5,6 @@ package com.example.mynews2.View.Fragments
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-
-
 import android.util.Log.*
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -20,8 +18,7 @@ import com.example.mynews2.View.Adapters.TopStoriesAdapter
 import com.example.mynews2.ViewModel.TopStoriesViewModel
 import com.example.mynews2.ViewModel.TopViewModelFactory
 import android.content.Intent as Intent1
-
-
+// Top Stories fragment to display top_stories articles
 class Top_Stories: Fragment(R.layout.top_stories) {
     private lateinit var topViewModel: TopStoriesViewModel
     private lateinit var topAdapter: TopStoriesAdapter
@@ -68,14 +65,3 @@ class Top_Stories: Fragment(R.layout.top_stories) {
             }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
