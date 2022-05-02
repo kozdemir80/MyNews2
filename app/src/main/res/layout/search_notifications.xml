@@ -91,8 +91,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/enable_notification"
-        android:layout_gravity="center"/>
+        android:text="enable_notifications (once per day)"
+        android:layout_gravity="center"
+        tools:ignore="HardcodedText" />
 
 
 

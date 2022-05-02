@@ -14,8 +14,6 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.example.mynews2.R
-
-
 private const val CHANNEL_ID="channelId"
 private const val CHANNEL_NAME="channelName"
 private const val NOTIFICATION_ID=0
@@ -43,7 +41,7 @@ class AlarmManager:BroadcastReceiver(){
         }
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME,
-                NotificationManager.IMPORTANCE_DEFAULT).apply {
+                NotificationManager.IMPORTANCE_HIGH).apply {
                 enableLights(true)
             }
             val manager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager

@@ -15,9 +15,7 @@ import kotlin.collections.ArrayList
 
 @Suppress("NAME_SHADOWING")
 class Notification_Activity: AppCompatActivity() {
-     val CHANNEL_ID="channelId"
-     val CHANNEL_NAME="channelName"
-     val NOTIFICATION_ID=0
+
      private lateinit var binding: SearchNotificationsBinding
      private lateinit var switchCompat: SwitchCompat
      private var nCategories:ArrayList<String> = ArrayList()

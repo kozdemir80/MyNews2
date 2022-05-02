@@ -3,7 +3,6 @@ package com.example.mynews2.View.Adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -29,7 +28,6 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchHolder>(){
     //Articles which will be displayed in recyclerView
     override fun onBindViewHolder(holder: SearchHolder, position: Int) {
         val article=differ.currentList[position]
-
          holder.view.apply {
              holder.titleView.text = article.section_name
              holder.dView.text = article.headline.main
