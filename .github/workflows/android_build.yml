@@ -43,7 +43,7 @@ jobs:
                 - name: Checkout the code
                   uses: actions/checkout@v2
 
-                - name: Run espresso tests
+                - name: Run İntegration tests
                   uses: reactivecircus/android-emulator-runner@v2
                   with:
                     api-level: 29

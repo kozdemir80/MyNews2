@@ -84,7 +84,6 @@ class Notification_Activity: AppCompatActivity() {
                 savedStateRegistry
 
             } else {
-                binding.checkboxArts1.isChecked = false
                 nCategories.remove("arts")
                 savedStateRegistry
             }
@@ -97,7 +96,6 @@ class Notification_Activity: AppCompatActivity() {
                 savedStateRegistry
 
             }else{
-                binding.checkboxBusiness1.isChecked = false
                 nCategories.remove("business")
                 savedStateRegistry
             }
@@ -106,12 +104,11 @@ class Notification_Activity: AppCompatActivity() {
 
             it.tag = "entrepreneurs"
             if (binding.checkboxEntrepreneurs1.isChecked){
-                binding.checkboxEntrepreneurs1.isChecked = true
                 nCategories.add("entrepreneurs")
                 savedStateRegistry
 
             }else{
-                binding.checkboxEntrepreneurs1.isChecked = false
+
                 nCategories.remove("entrepreneurs")
                 savedStateRegistry
             }
@@ -124,7 +121,6 @@ class Notification_Activity: AppCompatActivity() {
                 savedStateRegistry
 
             }else{
-                binding.checkboxPolitics1.isChecked = false
                 nCategories.remove("politics")
                 savedStateRegistry
             }
@@ -137,7 +133,6 @@ class Notification_Activity: AppCompatActivity() {
                 savedStateRegistry
 
             }else{
-                binding.checkboxSports1.isChecked = false
                 nCategories.remove("sports")
                 savedStateRegistry
             }
@@ -150,7 +145,6 @@ class Notification_Activity: AppCompatActivity() {
                 savedStateRegistry
 
             } else {
-                binding.checkboxBusiness1.isChecked = false
                 nCategories.remove("travel")
                 savedStateRegistry
             }
