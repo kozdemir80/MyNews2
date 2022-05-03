@@ -47,46 +47,47 @@ class Search_Result : AppCompatActivity(){
         val repository= SearchRespository()
         val searViewModelFactory= SearchViewModelFactory(repository)
         searchNewsViewModel= ViewModelProvider(this,searViewModelFactory).get(SearchNewsViewModel::class.java)
-               if ( searchNewsViewModel.getSearchNews(
+                searchNewsViewModel.getSearchNews(
                     query = query!!,
                     beginDate = beginDate!!,
                     endDate =endDate!!,
                     filterQuery = myCategory
-                ).isCompleted){
+                )
         searchNewsViewModel.searchResponse.observe({ lifecycle }) { response ->
             if (response.isSuccessful) {
                 Log.d("sResponse",response.body()?.copyright.toString())
                 Log.d("sResponse", response.body()?.status.toString())
-
                 response.body()?.let { searchResponse ->
-                    searchAdapter.differ.submitList(searchResponse.response.docs)
-                    searchAdapter.setOnItemClickListener(object :
-                        SearchAdapter.onItemClickListener {
-                        override fun onItemClick(position: Int) {
-                            val preferences =
-                                getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
-                            val editor = preferences.edit()
-                            editor.putString("mSearch",
-                                searchResponse.response.docs[position].web_url)
-                            editor.apply()
+                    if (searchResponse.response.docs.isEmpty()){
+                        val alertPopUp= AlertDialog.Builder(this)
+                            .setTitle("No articles matching your search. Please Try a different keyword")
+                            .setPositiveButton("Ok"){_,_->
+                            }
+                        alertPopUp.create().show()
+                    }else {
+                        searchAdapter.differ.submitList(searchResponse.response.docs)
+                        searchAdapter.setOnItemClickListener(object :
+                            SearchAdapter.onItemClickListener {
+                            override fun onItemClick(position: Int) {
+                                val preferences =
+                                    getSharedPreferences("myPreferences", Context.MODE_PRIVATE)
+                                val editor = preferences.edit()
+                                editor.putString("mSearch",
+                                    searchResponse.response.docs[position].web_url)
+                                editor.apply()
 
-                            val intent =
-                                Intent(this@Search_Result, searchWebView::class.java)
-                            startActivity(intent)
-                        }
-                    })
+                                val intent =
+                                    Intent(this@Search_Result, searchWebView::class.java)
+                                startActivity(intent)
+                            }
+                        })
+                    }
                 }
             }else {
                 response.errorBody().let {
                     Log.d("eResponse", it.toString())
                 }}
             }
-        }else{
-                   val alertPopUp= AlertDialog.Builder(this)
-                       .setTitle("No articles matching your search. Please Try a different keyword")
-                       .setPositiveButton("Ok"){_,_->
-                       }
-                   alertPopUp.create().show()
-        }
+
     }
 }
