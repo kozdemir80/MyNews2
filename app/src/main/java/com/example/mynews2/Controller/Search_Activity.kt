@@ -11,166 +11,137 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 class Search_Activity:AppCompatActivity() {
+ private lateinit var binding:SearchItemsBinding
+ private var categories:ArrayList<String> = ArrayList()
+ override fun onCreate(savedInstanceState: Bundle?) {
+  super.onCreate(savedInstanceState)
+  setContentView(R.layout.search_items)
+  binding = SearchItemsBinding.inflate(layoutInflater)
+  setContentView(binding.root)
+  onViewClicked()
+  val preferences=getSharedPreferences("Search Items", MODE_PRIVATE)
+  val editor=preferences.edit()
 
-    private lateinit var binding:SearchItemsBinding
+  //  date picker dialog for begin and endDate
+  val dateRangePicker= MaterialDatePicker.Builder
+   .datePicker()
+   .setTitleText("Select Date")
+   .build()
+  val endDateRangePicker= MaterialDatePicker.Builder
+   .datePicker()
+   .setTitleText("Select Date")
+   .build()
+  binding.beginDate.hint = "Begin Date"
+  binding.beginDate.setOnClickListener {
+   dateRangePicker.show(supportFragmentManager, dateRangePicker.toString())
+  }
+  dateRangePicker.addOnPositiveButtonClickListener {
+   val sdf = SimpleDateFormat("yyyyMMdd ", Locale.US)
+   val date=sdf.format(it)
 
-    private var categories:ArrayList<String> = ArrayList()
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.search_items)
-        binding = SearchItemsBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val preferences=getSharedPreferences("Search Items", MODE_PRIVATE)
-        val editor=preferences.edit()
-        // setting addTextChanged listener to enable button
-        binding.queryTerm.addTextChangedListener (object :TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+   binding.beginDate.text = date.toString()
+   val bData=binding.beginDate.text.toString()
+   editor.apply{
+    putString("beginD",bData)
+   }.apply()
 
-                binding.searchQueryButton.isEnabled = false
-            }
+  }
+  binding.endDate.hint="End Date"
+  binding.endDate.setOnClickListener {
+   endDateRangePicker.show(supportFragmentManager,endDateRangePicker.toString())
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+  }
+  endDateRangePicker.addOnPositiveButtonClickListener {
+   val sdf = SimpleDateFormat("yyyyMMdd ", Locale.getDefault())
+   val date = sdf.format(it)
+   binding.endDate.text = date.toString()
+   val eDate = binding.endDate.text.toString()
+   editor.apply {
+    putString("endD", eDate)
+   }.apply()
+  }
 
-                val queryTerm=binding.queryTerm.text.toString()
+ }
+ //checkBoxes and queryTerms for news categories
+ private fun onViewClicked(){
+  val preferences=getSharedPreferences("Search Items", MODE_PRIVATE)
+  val editor=preferences.edit()
+  binding.checkboxArts.setOnClickListener {
+   it.tag = "arts"
+   if (binding.checkboxArts.isChecked) {
+    categories.add("arts")
+   } else {
+    categories.remove("arts")
+   }
+  }
 
-                editor.apply {
-                    putString("myQuery",queryTerm)
-                }.apply()
+  binding.checkboxBusiness.setOnClickListener {
+   it.tag = "business"
+   if (binding.checkboxBusiness.isChecked){
+    categories.add("business")
+   }else{
+    categories.remove("business")
+   }
+  }
+  binding.checkboxEntrepreneurs.setOnClickListener {
 
-            }
-            override fun afterTextChanged(p0: Editable?) {
+   it.tag = "entrepreneurs"
+   if (binding.checkboxEntrepreneurs.isChecked){
+    categories.add("entrepreneurs").toString()
+   }else{
+    categories.remove("entrepreneurs")
+   }
+  }
+  binding.checkboxPolitics.setOnClickListener {
 
-            }
-        })
-        //  date picker dialog for begin and endDate
-        val dateRangePicker= MaterialDatePicker.Builder
-            .datePicker()
-            .setTitleText("Select Date")
-            .build()
-        val endDateRangePicker= MaterialDatePicker.Builder
-            .datePicker()
-            .setTitleText("Select Date")
-            .build()
-        binding.beginDate.hint = "Begin Date"
-        binding.beginDate.setOnClickListener {
-            dateRangePicker.show(supportFragmentManager, dateRangePicker.toString())
-        }
-        dateRangePicker.addOnPositiveButtonClickListener {
+   it.tag = "politics"
+   if (binding.checkboxPolitics.isChecked){
+    categories.add("politics")
+   }else{
+    categories.remove("politics")
+   }
+  }
+  binding.checkboxSports.setOnClickListener {
 
-            val sdf = SimpleDateFormat("yyyyMMdd ", Locale.US)
-            val date=sdf.format(it)
+   it.tag = "sports"
+   if (binding.checkboxSports.isChecked){
+    categories.add("sports")
+   }else{
+    categories.remove("sports")
+   }
+  }
+  binding.checkboxTravel.setOnClickListener {
+   it.tag = "travel"
+   if (binding.checkboxTravel.isChecked) {
+    categories.add("travel")
+   } else {
+    categories.remove("travel")
+   }
+  }
+  binding.queryTerm.addTextChangedListener (object :TextWatcher{
+   override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+   }
+   override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+    activateButton()
+    val queryTerm=binding.queryTerm.text.toString()
 
+    editor.apply {
+     putString("myQuery", queryTerm)
+    }.apply()
 
-            binding.beginDate.text = date.toString()
-            val bData=binding.beginDate.text.toString()
-            editor.apply{
-                putString("beginD",bData)
-            }.apply()
+   }
+   override fun afterTextChanged(p0: Editable?) {
+   }
+  })
+  binding.searchQueryButton.setOnClickListener {
 
-        }
-        binding.endDate.hint="End Date"
-        binding.endDate.setOnClickListener {
-            endDateRangePicker.show(supportFragmentManager,endDateRangePicker.toString())
-
-        }
-        endDateRangePicker.addOnPositiveButtonClickListener {
-            val sdf = SimpleDateFormat("yyyyMMdd ", Locale.getDefault())
-            val date = sdf.format(it)
-            binding.endDate.text = date.toString()
-            val eDate = binding.endDate.text.toString()
-            editor.apply {
-                putString("endD", eDate)
-            }.apply()
-        }
-        //checkBoxes for news categories
-        binding.checkboxArts.setOnClickListener {
-
-            it.tag = "arts"
-            if (binding.checkboxArts.isChecked) {
-                binding.checkboxArts.isChecked = true
-                binding.searchQueryButton.isEnabled = true
-                categories.add("arts")
-
-
-            } else {
-                binding.checkboxArts.isChecked = false
-                binding.searchQueryButton.isEnabled = false
-                categories.remove("arts")
-            }
-        }
-
-        binding.checkboxBusiness.setOnClickListener {
-            it.tag = "business"
-            if (binding.checkboxBusiness.isChecked){
-                binding.checkboxBusiness.isChecked = true
-                binding.searchQueryButton.isEnabled = true
-                categories.add("business")
-            }else{
-                binding.checkboxBusiness.isChecked = false
-                binding.searchQueryButton.isEnabled = false
-                categories.remove("business")
-            }
-        }
-        binding.checkboxEntrepreneurs.setOnClickListener {
-
-            it.tag = "entrepreneurs"
-            if (binding.checkboxEntrepreneurs.isChecked){
-                binding.checkboxEntrepreneurs.isChecked = true
-                binding.searchQueryButton.isEnabled = true
-                categories.add("entrepreneurs")
-            }else{
-                binding.checkboxEntrepreneurs.isChecked = false
-                binding.searchQueryButton.isEnabled = false
-                categories.remove("entrepreneurs")
-            }
-        }
-        binding.checkboxPolitics.setOnClickListener {
-
-            it.tag = "politics"
-            if (binding.checkboxPolitics.isChecked){
-                binding.checkboxPolitics.isChecked = true
-                binding.searchQueryButton.isEnabled = true
-                categories.add("politics")
-            }else{
-                binding.checkboxPolitics.isChecked = false
-                binding.searchQueryButton.isEnabled = false
-                categories.remove("politics")
-            }
-        }
-        binding.checkboxSports.setOnClickListener {
-
-            it.tag = "sports"
-            if (binding.checkboxSports.isChecked){
-                binding.checkboxSports.isChecked = true
-                binding.searchQueryButton.isEnabled = true
-                categories.add("sports")
-            }else{
-                binding.checkboxSports.isChecked = false
-                binding.searchQueryButton.isEnabled = false
-                categories.remove("sports")
-            }
-        }
-        binding.checkboxTravel.setOnClickListener {
-
-            it.tag = "travel"
-            if (binding.checkboxTravel.isChecked) {
-                binding.checkboxTravel.isChecked = true
-                binding.searchQueryButton.isEnabled = true
-
-                categories.add("travel")
-            } else {
-                binding.checkboxBusiness.isChecked = false
-                binding.searchQueryButton.isEnabled = false
-                categories.remove("travel")
-
-            }
-        }
-
-       binding.searchQueryButton.setOnClickListener {
-
-            val intent=Intent(this,Search_Result::class.java)
-                 intent.putExtra("myCategories",categories.toString())
-            startActivity(intent)
-        }
-    }
+   val intent = Intent(this, Search_Result::class.java)
+   intent.putExtra("myCategories", arrayListOf(categories))
+   startActivity(intent)
+  }
+ }
+ private fun activateButton(){
+  binding.searchQueryButton.isEnabled = binding.queryTerm.text.isNotEmpty()
+          && binding.queryTerm.text.isNotBlank() && categories.isNotEmpty()
+ }
  }

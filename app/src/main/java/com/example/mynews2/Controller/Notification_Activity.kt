@@ -1,6 +1,6 @@
 package com.example.mynews2.Controller
-
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.PendingIntent
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,6 @@ import com.example.mynews2.R
 import com.example.mynews2.databinding.SearchNotificationsBinding
 import java.util.*
 import kotlin.collections.ArrayList
-
 @Suppress("NAME_SHADOWING")
 class Notification_Activity: AppCompatActivity() {
 
@@ -21,8 +20,6 @@ class Notification_Activity: AppCompatActivity() {
      private var nCategories:ArrayList<String> = ArrayList()
     private lateinit var calendar: Calendar
      private lateinit var alarmManager:android.app.AlarmManager
-
-
     @SuppressLint("UnspecifiedImmutableFlag", "ObsoleteSdkInt", "ServiceCast",
         "LaunchActivityFromNotification")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +35,8 @@ class Notification_Activity: AppCompatActivity() {
         val editor=myPreferences.edit()
          // switch button
         binding.switchNotification.setOnClickListener {
-
-            intent.putExtra("nCategories",true)
+             notificationActivation()
+            intent.putExtra("nCategories", arrayListOf(nCategories))
             setAlarm()
             savedStateRegistry
         }
@@ -54,12 +51,12 @@ class Notification_Activity: AppCompatActivity() {
                 editor.apply {
                     putString("myQuery",queryTerm)
                 }.apply()
-                savedStateRegistry
             }
             override fun afterTextChanged(p0: Editable?) {
             }
         })
     }
+
      // setting alarm for broadcast receiver
     private fun setAlarm() {
         calendar= Calendar.getInstance()
@@ -83,7 +80,6 @@ class Notification_Activity: AppCompatActivity() {
 
             it.tag = "arts"
             if (binding.checkboxArts1.isChecked) {
-                binding.checkboxArts1.isChecked = true
                 nCategories.add("arts")
                 savedStateRegistry
 
@@ -97,7 +93,6 @@ class Notification_Activity: AppCompatActivity() {
         binding.checkboxBusiness1.setOnClickListener {
             it.tag = "business"
             if (binding.checkboxBusiness1.isChecked){
-                binding.checkboxBusiness1.isChecked = true
                 nCategories.add("business")
                 savedStateRegistry
 
@@ -125,7 +120,6 @@ class Notification_Activity: AppCompatActivity() {
 
             it.tag = "politics"
             if (binding.checkboxPolitics1.isChecked){
-                binding.checkboxPolitics1.isChecked = true
                 nCategories.add("politics")
                 savedStateRegistry
 
@@ -139,7 +133,6 @@ class Notification_Activity: AppCompatActivity() {
 
             it.tag = "sports"
             if (binding.checkboxSports1.isChecked){
-                binding.checkboxSports1.isChecked = true
                 nCategories.add("sports")
                 savedStateRegistry
 
@@ -153,7 +146,6 @@ class Notification_Activity: AppCompatActivity() {
 
             it.tag = "travel"
             if (binding.checkboxTravel1.isChecked) {
-                binding.checkboxTravel1.isChecked = true
                 nCategories.add("travel")
                 savedStateRegistry
 
@@ -161,9 +153,18 @@ class Notification_Activity: AppCompatActivity() {
                 binding.checkboxBusiness1.isChecked = false
                 nCategories.remove("travel")
                 savedStateRegistry
-
-
             }
         }
+    }
+    private fun notificationActivation(){
+       if ( nCategories.isNotEmpty()){
+           switchCompat.isEnabled
+       }else{
+           val alertDialog=AlertDialog.Builder(this)
+               .setTitle("Please select at least a category")
+               .setPositiveButton("Ok"){_,_->
+               }
+               alertDialog.create().show()
+       }
     }
 }

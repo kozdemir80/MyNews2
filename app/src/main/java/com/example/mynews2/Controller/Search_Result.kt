@@ -1,45 +1,29 @@
 @file:Suppress("NAME_SHADOWING")
 
 package com.example.mynews2.Controller
-
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-
-
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-
-
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
-
-
-
-
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mynews2.Api.Api.SearchApi.SearchRespository
-
-
 import com.example.mynews2.R
-
-
 import com.example.mynews2.View.Adapters.SearchAdapter
 import com.example.mynews2.ViewModel.SearchNewsViewModel
 import com.example.mynews2.ViewModel.SearchViewModelFactory
 import com.example.mynews2.databinding.SearchResultBinding
-
-
+@Suppress("EqualsBetweenInconvertibleTypes", "UNREACHABLE_CODE")
 class Search_Result : AppCompatActivity(){
     private lateinit var searchNewsViewModel: SearchNewsViewModel
     private lateinit var searchAdapter: SearchAdapter
     private lateinit var binding:SearchResultBinding
-
 
     @SuppressLint("NewApi", "NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.N)
@@ -58,18 +42,17 @@ class Search_Result : AppCompatActivity(){
         val query = preferences.getString("myQuery",null)
         val beginDate = preferences.getString("beginD",null)
         val endDate =preferences.getString("endD",null)
-        val filterQuery = intent.getBooleanExtra("myCategories", true)
-        //viewModel and viewModel factory for api response
+        val filterQuery = intent.getStringArrayListExtra("myCategories")
+        val myCategory= filterQuery.toString().replace("[","").replace("]","")
         val repository= SearchRespository()
         val searViewModelFactory= SearchViewModelFactory(repository)
         searchNewsViewModel= ViewModelProvider(this,searViewModelFactory).get(SearchNewsViewModel::class.java)
-        searchNewsViewModel.getSearchNews(
-            query = query!!,
-            beginDate = beginDate!!,
-            endDate =endDate!!,
-            filterQuery = filterQuery.toString()
-        )
-        //observer for response
+               if ( searchNewsViewModel.getSearchNews(
+                    query = query!!,
+                    beginDate = beginDate!!,
+                    endDate =endDate!!,
+                    filterQuery = myCategory
+                ).isCompleted){
         searchNewsViewModel.searchResponse.observe({ lifecycle }) { response ->
             if (response.isSuccessful) {
                 Log.d("sResponse",response.body()?.copyright.toString())
@@ -93,39 +76,17 @@ class Search_Result : AppCompatActivity(){
                         }
                     })
                 }
-            } else {
-                val alertPopUp= AlertDialog.Builder(this)
-                    .setMessage("There are no results with your selections, Please select again ")
-                alertPopUp.show()
-                response.errorBody()?.let { Log.d("eResponse", it.string()) }
+            }else {
+                response.errorBody().let {
+                    Log.d("eResponse", it.toString())
+                }}
             }
-
+        }else{
+                   val alertPopUp= AlertDialog.Builder(this)
+                       .setTitle("No articles matching your search. Please Try a different keyword")
+                       .setPositiveButton("Ok"){_,_->
+                       }
+                   alertPopUp.create().show()
         }
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
